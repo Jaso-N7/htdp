@@ -7,7 +7,8 @@
                 :components
                 ((:file "htdf")
 		 (:file "htdd")
-		 (:file "main"))))
+		 (:file "main")
+		 (:file "guess"))))
   :description "Learning How to Design Programs"
   :in-order-to ((test-op (test-op "htdp/tests"))))
 
@@ -18,7 +19,8 @@
 	       :ptester)
   :components ((:module "tests"
                 :components
-                ((:file "htdf")
+                ((:file "guess")
+		 (:file "htdf")
 		 (:file "htdd")
 		 (:file "main"))))
   :description "Test system for htdp"

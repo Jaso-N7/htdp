@@ -1,11 +1,11 @@
 (defpackage htdp/tests
   (:use :cl)
-  (:import-from
-   :htdf-tests
-   :test-functions)
-  (:import-from
-   :htdd-tests
-   :test-examples)
+  (:import-from :htdf-tests
+		#:test-functions)
+  (:import-from :htdd-tests
+		#:test-examples)
+  (:import-from :section-5-tests
+		#:test-section-5)
   (:export :resolve))
 
 (in-package :htdp/tests)
@@ -22,9 +22,12 @@
 
     (let ((accum (mapcar #'+
 			 (test-functions ok bad)
-			 (test-examples ok bad))))
+			 (test-examples ok bad)
+			 (test-section-5 ok bad))))
 
       (princ "Examples revealed the following:")
       (format t "~&Total Successes: ~A~%Total Errors Detected: ~A~%"
 	      (first accum)
-	      (second accum)))))
+	      (second accum))
+      ;; !!! TODO: Only run Property-Based Testing once (= 0 (second accum))
+      )))

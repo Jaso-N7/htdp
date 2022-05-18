@@ -1,0 +1,127 @@
+(defpackage :htdf-tests
+  (:documentation "All tests relating to the HTDF package")
+  (:use :cl)
+  (:import-from :ptester
+		#:*BREAK-ON-TEST-FAILURES*
+		#:TEST-WARNING 
+		#:*ERROR-PROTECT-TESTS* 
+		#:*TEST-ERRORS* 
+		#:WITH-TESTS 
+		#:TEST-NO-ERROR 
+		#:TEST-NO-WARNING 
+		#:TEST-ERROR 
+		#:*TEST-UNEXPECTED-FAILURES* 
+		#:TEST 
+		#:*TEST-SUCCESSES* )
+  (:import-from 
+   :htdf
+   :double
+   :pluralize
+   :string-first
+   :string-last
+   :string-rest
+   :string-remove-last
+   :profit
+   :revenue
+   :cost
+   :wage
+   :attendees)
+  (:export :test-functions))
+
+(in-package :htdf-tests)
+
+;; =====================================================================
+;;;; TESTS --- Examples
+
+(defun test-functions (ok bad)
+  (with-tests (:name "Produces 2 times the given number")
+    (test (* 2 3) (double 3))
+    (test 8.4 (double 4.2))
+    (test 0 (double 0))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Pluralizes a string")
+    (test "dogs" (pluralize "dog") :test #'string=)
+    (test "grasss" (pluralize "grass") :test #'string=)
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Extracts the first character from a non-empty string")
+    (test #\c (string-first "character"))
+    (test #\S (string-first "String"))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Extracts the last character from a non-empty string")
+    (test #\r (string-last "character"))
+    (test #\g (string-last "String"))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Returns the tail of the non-empty string.")
+    (test "haracter" (string-rest "character") :test #'string=)
+    (test "tring" (string-rest "String") :test #'string=)
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Returns the tail of the non-empty string.")
+    (test "Cat" (string-remove-last "Cats") :test #'string=)
+    (test "Dog" (string-remove-last "Dogs") :test #'string=)
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Profit: Difference between revenue and costs")
+    (test 120 (profit 5))
+    (test 225 (profit 4))
+    (test 120 (profit 3))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Revenue: Product of ticket price and number of attendees")
+    (test (* 5 120) (revenue 5))
+    (test 150 (revenue 4))
+    (test 180 (revenue 3))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (with-tests (:name "Attendees: Determine attendees based on ticket prices")
+    (test 120 (attendees 5))
+    (test 135 (attendees 4.9))
+    (test 270 (attendees 4))
+    (test 420 (attendees 3))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Cost: Compute costs at specific ticket prices.")
+    (test (* 120 0.04) (cost 5))
+    (test (* 120 0.04) (cost 4))
+    (test (* 120 0.04) (cost 3))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+  (with-tests (:name "Wage: Calculates paycheque.")
+    (test 0 (wage 12))
+    (test 240 (wage 20))
+    (test (* 12 30) (wage 30))
+    (test 780 (wage 65))
+    (test (* 40 20) (wage 20 40))
+    (test 0 (wage 70))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  (terpri)
+
+  (list ok bad))
+
+;; =====================================================================
+;;;; TESTS --- Properties

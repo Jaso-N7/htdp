@@ -23,20 +23,24 @@
 
   (defun reveal-target ()
     "Only used for confirmation..."
-    target)
+    target))
 
-  ;; Number (Symbol) Number -> (Symbol)
-  (defun guess-with-tui (&optional (chances 5) (response '(begin)) (accum 0))
-    "Starts the guessing game, giving the user some chances to guess
+;; Function Number -> (Symbol)
+(defun guess-with-tui (fn &optional (chances 5))
+  "Starts the guessing game, giving the user some chances to guess
 correctly"
-    (princ response)
-    (if (or (= accum chances)
-	    (equal response '(perfect)))
-	`(target was ,(reveal-target))
-	(let ((ans (read-line
-		    (format t "~&This is try ~A/~A, what is your best guess? "
-			    (1+ accum)
-			    chances))))
-	  (guess-with-tui chances
-			  (check-guess (parse-integer ans) (reveal-target))
-			  (1+ accum))))))
+  (guesser fn (funcall fn -1) chances 0))
+
+;; Function (Symbol) Number Number -> (Symbol)
+(defun guesser (fn response chances  accum)
+  "Auxilliary function for GUESS-WITH-TUI"
+  (princ response)
+  (if (or (= accum chances)
+	  (equal response '(perfect)))
+      `(target was ,(reveal-target))
+      (let* ((ans (read-line
+		   (format t "~&This is try ~A/~A, what is your best guess? "
+			   (1+ accum)
+			   chances)))
+	     (resp (funcall fn (parse-integer ans) (reveal-target))))
+	(guesser fn resp chances (1+ accum)))))

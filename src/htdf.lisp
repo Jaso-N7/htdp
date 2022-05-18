@@ -146,7 +146,7 @@ at some given TICKET-PRICE."
 
 (defun cost (ticket-price)
   "To compute the costs, given the ticket-price."
-  (+ 180 (attendees ticket-price)))
+  (+ 180 (* .04 (attendees ticket-price))))
 
 ;; attendees : Number -> Number
 ;; (defun attendees (ticket-price) 0) ; stub
@@ -154,9 +154,9 @@ at some given TICKET-PRICE."
 
 (defun attendees (ticket-price)
   "To compute the number of attendees, given ticket-price"
-  (cond ((= ticket-price 5.) 120)
-	((= ticket-price 4.) 135)
-	((= ticket-price 3.) 150)))
+  (+ 120
+     (* (/ 15 0.1)
+	(- 5 ticket-price))))
 
 #| ======= PROBLEM (HtDP1ed Section 4) =======
 Company XYZ & Co. pays all its employees $12 per hour. A typical employee works between 20 and 65 hours per week. Develop a program that determines the wage of an employee from the number of hours of work, *if the number is within the proper range.*

@@ -17,14 +17,14 @@
 (let ((ptester:*test-successes* 0)
       (ptester:*test-errors* 0))
   (defun probe (&key (ok ptester:*test-successes*)
-		    (bad ptester:*test-errors*))
+		  (bad ptester:*test-errors*))
     "Test all examples."
 
-    (let ((accum (mapcar #'+ 
+    (let ((accum (mapcar #'+
 			 (test-functions ok bad)
 			 (test-examples ok bad))))
 
       (princ "Examples revealed the following:")
-      (format t "~&Total Successes: ~A~%Total Errors: ~A~%"
+      (format t "~&Total Successes: ~A~%Total Errors Detected: ~A~%"
 	      (first accum)
 	      (second accum)))))

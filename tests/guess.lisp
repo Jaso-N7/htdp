@@ -22,9 +22,9 @@
 (defun test-section-5 (ok bad)
   "Confirm all exercises from HTDP 1e section 5"
   (ptester:with-tests (:name "CHECK-GUESS: Can you guess the correct number.")
-    (test '( #:too #:small) (check-guess 1 10) :test #'equal)
-    (test '(#:perfect) (check-guess 42 42) :test #'equal)
-    (test '(#:too #:large) (check-guess 1000 1) :test #'equal)
+    (test htdp:*small* (check-guess 1 10))
+    (test htdp:*perfect* (check-guess 42 42))
+    (test htdp:*high* (check-guess 1000 1))
 
     (incf ok *test-successes*)
     (incf bad *test-errors*))

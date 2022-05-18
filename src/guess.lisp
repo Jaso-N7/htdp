@@ -1,5 +1,14 @@
 (in-package :htdp)
 
+(export '(*perfect* *small* *high*))
+
+(defparameter *perfect* '(perfect)
+  "User guessed correctly")
+(defparameter *small* '(too small)
+  "User guessed too low")
+(defparameter *high* '(too large)
+  "User guessed too high")
+
 (let ((target (random 99999)))
   
   ;; Number Number -> (Symbol)
@@ -7,19 +16,19 @@
   ;; (defun check-guess (guess target) '(too small)) ; stub
 
   #| TEMPLATE: check-guess
-  				       	;
-  (defun check-guess (guess target)	;
-  (cond ((= guess target) (list guess))	;
-  ((< guess target) (list guess))	;
-  ((> guess target) (list guess))))	; ; ;
-					;
+  				       	; ; ;
+  (defun check-guess (guess target)	; ; ;
+  (cond ((= guess target) (list guess))	; ; ;
+  ((< guess target) (list guess))	; ; ;
+  ((> guess target) (list guess))))	; ; ; ; ;
+					; ; ;
   |#
 
   (defun check-guess (guess &optional (target target))
     "Consumes two numbers, GUESS and TARGET. Player tries to guess the target."
-    (cond ((= guess target) '(perfect))
-	  ((< guess target) '(too small))
-	  ((> guess target) '(too large))))
+    (cond ((= guess target) *perfect*)
+	  ((< guess target) *small*)
+	  ((> guess target) *high*)))
 
   (defun reveal-target ()
     "Only used for confirmation..."

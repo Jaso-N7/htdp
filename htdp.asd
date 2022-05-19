@@ -7,8 +7,10 @@
                 :components
                 ((:file "htdf")
 		 (:file "htdd")
+		 (:file "guess")
+		 (:file "compound-data")
 		 (:file "main")
-		 (:file "guess"))))
+		 )))
   :description "Learning How to Design Programs"
   :in-order-to ((test-op (test-op "htdp/tests"))))
 

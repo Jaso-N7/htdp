@@ -8,6 +8,7 @@
 and problem sets.")
   (:use :cl)
   (:export
+   #:within-range
    #:make-jet-fighter
    #:jet-fighter-p
    #:jet-fighter-designation
@@ -20,15 +21,21 @@ and problem sets.")
 ;;; =====================================================================
 ;;;; DATA DEFINITIONS:
 
+;; Distance is Number
+;; Interpretation: Range from base to target in Miles
+
+(defparameter *distance* 0
+  "Range from Airbase to target in miles")
+
 (defstruct jet-fighter
   ;; (:documentation "An airforce's jet fighter performance.
-;; Acceleration and Top Speed are MPH
-;; Range is indicative of effective Combat Range.")
+  ;; Acceleration and Top Speed are MPH
+  ;; Range is indicative of effective Combat Range.")
   designation
   acceleration 				; 
   top-speed
   range)
-;; JetFighter is (make-jet-fighter Symbol Number Number Number)
+;; JetFighter is (make-jet-fighter Symbol Number Number Distance)
 ;; Interpretation: See JET-FIGHTER documentation. For ease of computation
 ;;                 all units are represented in MILES unless otherwise stated.
 
@@ -63,6 +70,8 @@ and the MiG-23ML in 3.45s
 - Top speed at altitude.
 - (Combat) Range with standard armament, no drop-tanks.")
 
+#| TEMPLATE
+
 (defun fn-for-jet-fighter (jf)
   "Template rules used:
 - compound: 4 fields"
@@ -71,6 +80,18 @@ and the MiG-23ML in 3.45s
 	(jet-fighter-top-speed jf) 	; Number
 	(jet-fighter-range jf))) 	; Number
 
+|#
 
 ;;; =====================================================================
 ;;;; FUNCTIONS:
+
+;; JetFighter Distance -> Boolean
+;; (defun within-range (jf distance) NIL) ; stub
+;; <template used from JetFighter>
+
+(defun within-range (jf distance)
+  "Consumes a fighter record and the distance of a target from the (fighter's) base.
+It determines whether the fighter can reach the intended target. Returns T if it can; Otherwise NIL."
+  (> (jet-fighter-range jf) distance))
+;; Can also be coded: (> (jet-fighter-range jf) distance)
+

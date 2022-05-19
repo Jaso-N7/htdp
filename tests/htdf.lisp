@@ -33,6 +33,7 @@
 ;; =====================================================================
 ;;;; TESTS --- Examples
 
+;; Number Number -> (Number Number)
 (defun test-functions (ok bad)
   (with-tests (:name "Produces 2 times the given number")
     (test (* 2 3) (double 3))

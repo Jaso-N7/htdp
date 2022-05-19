@@ -25,6 +25,7 @@
 ;; =====================================================================
 ;;;; TESTS --- Examples
 
+;; Number Number -> (Number Number)
 (defun test-examples (ok bad)
   "Ensure all functions return as expected"
   (with-tests (:name "TRAFFIC-LIGHT-NEXT Yields the next state given

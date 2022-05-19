@@ -6,13 +6,13 @@
 		#:test-examples)
   (:import-from :section-5-tests
 		#:test-section-5)
+  (:import-from :section-6-tests
+		#:test-compound-data)
   (:export :resolve))
 
 (in-package :htdp/tests)
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :htdp)' in your Lisp.
-
-
 
 (let ((ptester:*test-successes* 0)
       (ptester:*test-errors* 0))
@@ -23,7 +23,8 @@
     (let ((accum (mapcar #'+
 			 (test-functions ok bad)
 			 (test-examples ok bad)
-			 (test-section-5 ok bad))))
+			 (test-section-5 ok bad)
+			 (test-compound-data ok bad))))
 
       (princ "Examples revealed the following:")
       (format t "~&Total Successes: ~A~%Total Errors Detected: ~A~%"

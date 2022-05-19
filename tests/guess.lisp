@@ -19,6 +19,7 @@
 
 (in-package :section-5-tests)
 
+;; Number Number -> (Number Number)
 (defun test-section-5 (ok bad)
   "Confirm all exercises from HTDP 1e section 5"
   (ptester:with-tests (:name "CHECK-GUESS: Can you guess the correct number.")

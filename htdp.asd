@@ -21,7 +21,8 @@
 	       :ptester)
   :components ((:module "tests"
                 :components
-                ((:file "guess")
+                ((:file "compound-data")
+		 (:file "guess")
 		 (:file "htdf")
 		 (:file "htdd")
 		 (:file "main"))))

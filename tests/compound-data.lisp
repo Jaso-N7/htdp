@@ -49,7 +49,9 @@
 	    :test #'=)
       (test 480 (jet-fighter-range
 		 (reduce-range (make-jet-fighter :range 600)))
-	    :test #'=)))
+	    :test #'=)
 
+      (incf ok *test-successes*)
+      (incf bad *test-errors*)))
 
   (list ok bad))

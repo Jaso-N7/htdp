@@ -3,6 +3,7 @@
   (:use :cl :ptester)
   (:import-from :htdc
 		#:within-range
+		#:reduce-range
 		#:make-jet-fighter
 		#:jet-fighter-p
 		#:jet-fighter-designation
@@ -23,7 +24,7 @@
 	     :acceleration 20
 	     :top-speed 1221
 	     :range 2300)))
-    
+
     (with-tests (:name "Testing JET-FIGHTER")
       (test T (jet-fighter-p jf))
       (test 'LAVI (jet-fighter-designation jf))
@@ -40,7 +41,15 @@
       (test NIL (within-range jf 3000))
 
       (incf ok *test-successes*)
-      (incf bad *test-errors*)))
-  (terpri)
+      (incf bad *test-errors*))
+    (terpri)
+
+    (with-tests (:name "Can reduce Jet Fighter's range.")
+      (test (* (jet-fighter-range jf) .8) (jet-fighter-range (reduce-range jf))
+	    :test #'=)
+      (test 480 (jet-fighter-range
+		 (reduce-range (make-jet-fighter :range 600)))
+	    :test #'=)))
+
 
   (list ok bad))

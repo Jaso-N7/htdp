@@ -9,6 +9,7 @@ and problem sets.")
   (:use :cl)
   (:export
    #:within-range
+   #:reduce-range
    #:make-jet-fighter
    #:jet-fighter-p
    #:jet-fighter-designation
@@ -95,3 +96,6 @@ It determines whether the fighter can reach the intended target. Returns T if it
   (> (jet-fighter-range jf) distance))
 ;; Can also be coded: (> (jet-fighter-range jf) distance)
 
+;; JetFighter -> JetFighter
+;; consumes a fighter record and produces one in which the range field is reduced to 80% of the original value.
+(defun reduce-range (jf) jf)

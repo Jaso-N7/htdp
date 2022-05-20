@@ -97,5 +97,19 @@ It determines whether the fighter can reach the intended target. Returns T if it
 ;; Can also be coded: (> (jet-fighter-range jf) distance)
 
 ;; JetFighter -> JetFighter
-;; consumes a fighter record and produces one in which the range field is reduced to 80% of the original value.
-(defun reduce-range (jf) jf)
+;; (defun reduce-range (jf) jf) ; stub
+;; <template used from JetFighter>
+
+(defun reduce-range (jf)
+  "Consumes a fighter record and produces one in which the range field is reduced to 80% of the original value.
+
+EXAMPLES:
+given: 600, expect: 480
+
+SIDE EFFECTS:
+The struct is modified."
+  (make-jet-fighter
+   :designation (jet-fighter-designation jf) 	; Symbol
+   :acceleration (jet-fighter-acceleration jf) 	; Number
+   :top-speed (jet-fighter-top-speed jf)	; Number
+   :range (* 80/100 (jet-fighter-range jf))))	; Number

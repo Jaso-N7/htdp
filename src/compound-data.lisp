@@ -28,6 +28,10 @@ and problem sets.")
 (defparameter *distance* 0
   "Range from Airbase to target in miles")
 
+;; JetFighter is a structure
+;;   (make-jet-fighter Symbol Number Number Distance)
+;; Interpretation: See JET-FIGHTER documentation. For ease of computation
+;;                 all units are represented in MILES unless otherwise stated.
 (defstruct jet-fighter
   "An airforce's jet fighter performance.
   Acceleration and Top Speed are MPH
@@ -36,15 +40,14 @@ and problem sets.")
   acceleration 				; 
   top-speed
   range)
-;; JetFighter is (make-jet-fighter Symbol Number Number Distance)
-;; Interpretation: See JET-FIGHTER documentation. For ease of computation
-;;                 all units are represented in MILES unless otherwise stated.
+
+;;; JetFighter Examples
 
 (defparameter +raptor+ (make-jet-fighter
-		      :designation 'f-22a
-		      :acceleration 51.75
-		      :top-speed 1500
-		      :range 679)
+			:designation 'f-22a
+			:acceleration 51.75
+			:top-speed 1500
+			:range 679)
   "Lockheed Martin Raptor F-22A information taken from various sources.
 Acceleration in seconds. Unofficially 3.05s quicker than the requirement of 54s.
 Top speed Mach 2.25 at altitude in MPH.
@@ -71,8 +74,9 @@ and the MiG-23ML in 3.45s
 - Top speed at altitude.
 - (Combat) Range with standard armament, no drop-tanks.")
 
-#| TEMPLATE
+#| TEMPLATE:
 
+;; fn-for-jet-fighter : JetFighter -> ???
 (defun fn-for-jet-fighter (jf)
   "Template rules used:
 - compound: 4 fields"

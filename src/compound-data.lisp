@@ -29,9 +29,9 @@ and problem sets.")
   "Range from Airbase to target in miles")
 
 (defstruct jet-fighter
-  ;; (:documentation "An airforce's jet fighter performance.
-  ;; Acceleration and Top Speed are MPH
-  ;; Range is indicative of effective Combat Range.")
+  "An airforce's jet fighter performance.
+  Acceleration and Top Speed are MPH
+  Range is indicative of effective Combat Range."
   designation
   acceleration 				; 
   top-speed

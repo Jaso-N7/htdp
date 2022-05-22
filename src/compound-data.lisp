@@ -34,8 +34,10 @@ and problem sets.")
 ;;                 all units are represented in MILES unless otherwise stated.
 (defstruct jet-fighter
   "An airforce's jet fighter performance.
-  Acceleration and Top Speed are MPH
-  Range is indicative of effective Combat Range."
+Where 
+  :DESIGNATION is a Symbol 
+  :ACCELERATION and :TOP-SPEED are Numbers representing MPH
+  :RANGE is the DISTANCE (in miles) indicative of effective Combat Range."
   designation
   acceleration 				; 
   top-speed

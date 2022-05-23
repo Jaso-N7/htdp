@@ -96,6 +96,15 @@ and the MiG-23ML in 3.45s
   :PRODUCER is a String of the Producer's name."
   title producer)
 
+#| TEMPLATE:
+
+;; fn-for-movie : Movie -> ???
+(defun fn-for-movie (film)
+  (values (movie-title film)
+	  (movie-producer film)))
+
+|#
+
 ;; Girlfriend is a structure:
 ;;   (make-girlfriend String Symbol Symbol Symbol)
 ;; INTERPRETATION: <see Girlfriend documentation>
@@ -106,6 +115,16 @@ and the MiG-23ML in 3.45s
 :PHONE is also a Symbol "
   name hair eyes phone)
 
+#| TEMPLATE:
+
+;; fn-for-gf : Girlfriend -> ???
+(defun fn-for-gf (gf)
+  (values (girlfriend-name gf)
+	  (girlfriend-hair gf)
+	  (girlfriend-eyes gf)
+	  (girlfriend-phone gf)))
+|#
+
 ;; Cheerleader is a structure:
 ;;   (make-cheerleader String Symbol)
 ;; INTERPRETATION: <see CHEERLEADER documentation
@@ -114,6 +133,15 @@ and the MiG-23ML in 3.45s
 :NAME is a String of the full name and 
 :NUMBER is a Symbol representing her contact. "
   name number)
+
+#| TEMPLATE:
+
+;; fn-for-cheerleader : Cheerleader -> ???
+(defun fn-for-cheerleader (cl)
+  (values (cheerleader-name cl)
+	  (cheerleader-number cl)))
+
+|#
 
 ;; CD is a structure:
 ;;   (make-cd String String Single-Float)
@@ -124,6 +152,16 @@ where :ARTIST and :TITLE are Strings and
 :PRICE is a Single-Float of the CD's retail."
   artist title price)
 
+#| TEMPLATE:
+
+;; fn-for-cd : CD -> ???
+(defun fn-for-cd (cd)
+  (values (cd-artist cd)
+	  (cd-title cd)
+	  (cd-price cd)))
+
+|#
+
 ;; Sweater is a structure:
 ;;   (make-sweater Symbol Symbol String)
 ;; INTERPRETATION: <see SWEATER documentation>
@@ -131,6 +169,16 @@ where :ARTIST and :TITLE are Strings and
   "Details of a sweater, where :MATERIAL and :SIZE are Symbols and
 :PRODUCER is a String"
   material size producer)
+
+#| TEMPLATE:
+
+;; fn-for-sweater : Sweater -> ???
+(defun fn-for-sweater (a-sweater)
+  (values (sweater-material a-sweater)
+	  (sweater-size a-sweater)
+	  (sweater-producer a-sweater)))
+
+|#
 
 ;; A Clock is a structure:
 ;;   (make-clock Number Number Number)
@@ -145,7 +193,7 @@ and :SECONDS do not exceed 59"
 ;;   (make-words Symbol Symbol Symbol)
 (defstruct words
   "Represents three-letter words. Each symbol is a letter
-of the word."
+of the word from 'A to 'Z."
   first-letter second-letter last-letter)
 
 ;;; =====================================================================

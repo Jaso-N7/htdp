@@ -340,15 +340,11 @@ None."
 
 ;; perimeter : Shape -> Number
 ;; To compute the perimeter of a shape
-(defun perimeter (shape) 0)
+;; (defun perimeter (shape) 0) ; stub
+;; <template from POSN>
 
-;; (defun perimeter (shape)
-;;   (typecase shape
-;;     (circle (values
-;; 	     (posn-x (circle-pos shape))
-;; 	     (posn-y (circle-pos shape))
-;; 	     (circle-s shape)))
-;;     (square (values
-;; 	     (posn-x (square-pos shape))
-;; 	     (posn-y (square-pos shape))
-;; 	     (square-s shape)))))
+(defun perimeter (shape)
+  (typecase shape
+    (circle (* (* 2 (circle-s shape))
+	       pi))
+    (square (* (square-s shape) 4))))

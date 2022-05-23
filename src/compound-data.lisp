@@ -8,6 +8,7 @@
 and problem sets.")
   (:use :cl)
   (:export
+   ;; JetFighter
    #:within-range
    #:reduce-range
    #:time->seconds
@@ -18,6 +19,8 @@ and problem sets.")
    #:jet-fighter-acceleration
    #:jet-fighter-top-speed 
    #:jet-fighter-range
+
+   ;; Time
    #:make-time
    #:copy-time
    #:time-p

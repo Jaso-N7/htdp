@@ -22,11 +22,9 @@ and problem sets.")
 ;;; =====================================================================
 ;;;; DATA DEFINITIONS:
 
-;; Distance is Number
-;; Interpretation: Range from base to target in Miles
-
 (defparameter *distance* 0
-  "Range from Airbase to target in miles")
+  "Distance is a Number.
+Interpreted as Range from Airbase to target in miles")
 
 ;; JetFighter is a structure
 ;;   (make-jet-fighter Symbol Number Number Distance)
@@ -88,6 +86,51 @@ and the MiG-23ML in 3.45s
 	(jet-fighter-range jf))) 	; Number
 
 |#
+
+;; Movie is a structure of
+;;   (make-movie String  String)
+;; INTERPRETATION: <see MOVIE documentation>
+(defstruct movie
+  "Where 
+  :TITLE is a String representing the movie's name
+  :PRODUCER is a String of the Producer's name."
+  title producer)
+
+;; Girlfriend is a structure:
+;;   (make-girlfriend String Symbol Symbol Symbol)
+;; INTERPRETATION: <see Girlfriend documentation>
+(defstruct girlfriend
+  "Contains the details of a girlfriend, where
+:NAME is a String of the full name and 
+:HAIR and :EYES are Symbol used to describe colours.
+:PHONE is also a Symbol "
+  name hair eyes phone)
+
+;; Cheerleader is a structure:
+;;   (make-cheerleader String Symbol)
+;; INTERPRETATION: <see CHEERLEADER documentation
+(defstruct cheerleader
+  "Contains a Cheerleaders contact details, where
+:NAME is a String of the full name and 
+:NUMBER is a Symbol representing her contact. "
+  name number)
+
+;; CD is a structure:
+;;   (make-cd String String Single-Float)
+;; INTERPRETATION: <see CD documentation>
+(defstruct cd
+  "Represtents the information pertaining to a Compact-Disc,
+where :ARTIST and :TITLE are Strings and
+:PRICE is a Single-Float of the CD's retail."
+  artist title price)
+
+;; Sweater is a structure:
+;;   (make-sweater Symbol Symbol String)
+;; INTERPRETATION: <see SWEATER documentation>
+(defstruct sweater
+  "Details of a sweater, where :MATERIAL and :SIZE are Symbols and
+:PRODUCER is a String"
+  material size producer)
 
 ;;; =====================================================================
 ;;;; FUNCTIONS:

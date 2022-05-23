@@ -132,6 +132,15 @@ where :ARTIST and :TITLE are Strings and
 :PRODUCER is a String"
   material size producer)
 
+;; A Clock is a structure:
+;;   (make-clock Number Number Number)
+(defstruct clock
+  "Represents points in time since midnight, where :HOURS :MINUTES
+and :SECONDS are numbers.
+:HOURS does not exceed 23 (can be limited to 12); whereas :MINUTES
+and :SECONDS do not exceed 59"
+  hours minutes seconds)
+
 ;;; =====================================================================
 ;;;; FUNCTIONS:
 

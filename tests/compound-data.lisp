@@ -19,7 +19,15 @@
 		#:time-p
 		#:time-hours
 		#:time-minutes
-		#:time-seconds)
+		#:time-seconds
+
+
+		;; Shapes
+		#:distance-to-0
+		#:perimeter
+		#:make-posn #:posn-x #:posn-y
+		#:make-circle #:circle-pos #:circle-s
+		#:make-square #:square-pos #:square-s)
   (:export #:test-compound-data))
 
 (in-package :section-6-tests)
@@ -88,6 +96,30 @@
 
       (incf ok *test-successes*)
       (incf bad *test-errors*))
+    (terpri)
+
+    (with-tests (:name "DISTANCE-TO-0: Can deduce the distance to origin.")
+      (test 0 (distance-to-0 0) :test #'=)
+      (test 10 (distance-to-0 10) :test #'=)
+      (test 5.3851647 (distance-to-0 (htdc:make-posn :x 5 :y 2)) :test #'=)
+
+      (incf ok *test-successes*)
+      (incf bad *test-errors*))
+
+    (terpri)
+    (with-tests (:name "PERIMETER: Calculates a Shapes perimeter.")
+      (test 16 (htdc:perimeter (htdc:make-square
+				:pos (htdc:make-posn :x 10 :y 10)
+				:s 4))
+	    :test #'=)
+      (test (* 40 pi) (htdc:perimeter (htdc:make-circle
+				       :pos (htdc:make-posn :x 30 :y 30)
+				       :s 20))
+	    :test #'=)
+
+      (incf ok *test-successes*)
+      (incf bad *test-errors*))
+    
     (terpri))
 
   (list ok bad))

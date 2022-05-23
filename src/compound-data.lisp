@@ -12,21 +12,26 @@ and problem sets.")
    #:within-range
    #:reduce-range
    #:time->seconds
-   #:make-jet-fighter
-   #:copy-jet-fighter
-   #:jet-fighter-p
+   #:make-jet-fighter #:copy-jet-fighter #:jet-fighter-p
    #:jet-fighter-designation
    #:jet-fighter-acceleration
-   #:jet-fighter-top-speed 
+   #:jet-fighter-top-speed
    #:jet-fighter-range
 
    ;; Time
-   #:make-time
-   #:copy-time
-   #:time-p
-   #:time-hours
-   #:time-minutes
-   #:time-seconds))
+   #:make-time #:copy-time #:time-p #:time-hours #:time-minutes #:time-seconds
+
+   ;; Shapes
+   #:distance-to-0
+   #:perimeter
+   #:make-posn #:posn-p  #:copy-posn #:posn-x #:posn-y
+
+   ;; Circles
+   #:make-circle #:copy-circle #:circle-p #:circle-pos #:circle-s
+
+   ;; Squares
+   #:make-square #:copy-square #:square-p #:square-pos #:square-s
+   ))
 
 (in-package :htdc)
 
@@ -220,18 +225,58 @@ of the word from 'A to 'Z."
   first-letter second-letter last-letter)
 
 
+;; A POSN is a struture
+;;  (make-posn Number Number)
+(defstruct posn 
+  "Represents the Cardinal points on an X,Y axis"
+  x y)
 
-;;; =====================================================================
-;;;; FUNCTIONS:
+#| TEMPLATE:
 
-;; JetFighter Distance -> Boolean
-;; (defun within-range (jf distance) NIL) ; stub
-;; <template used from JetFighter>
+;; fn-for-posn : posn -> ???
+(defun fn-for-posn (coord)
+  (values (posn-x coord)
+	  (posn-y coord)))
 
-(defun within-range (jf distance)
-  "Consumes a fighter record and the distance of a target from the (fighter's) base.
-It determines whether the fighter can reach the intended target. Returns T if it can; Otherwise NIL."
-  (> (jet-fighter-range jf) distance))
+|#
+
+;; A Pixel is either:
+;; - Number, or
+;; - Posn structure.
+
+;; A Shape is either:
+;; - A Circle structure: (make-circle Posn Number)
+;; - A Square structure: (make-square Posn Number)
+(defstruct circle pos s)
+(defstruct square pos s)
+
+#| TEMPLATE (Shape):
+
+;; fn-for-shape : Shape -> ???
+(defun fn-for-shape (shape)
+  (typecase shape
+    (circle (values
+	     (posn-x (circle-pos shape))
+	     (posn-y (circle-pos shape))
+	     (circle-s shape)))
+    (square (values
+	     (posn-x (square-pos shape))
+	     (posn-y (square-pos shape))
+	     (square-s shape)))))
+
+|#					;
+					;
+;;; ===================================================================== ;
+;;;; FUNCTIONS:				;
+					;
+;; JetFighter Distance -> Boolean	;
+;; (defun within-range (jf distance) NIL) ; stub ;
+;; <template used from JetFighter>	;
+					;
+(defun within-range (jf distance)	;
+"Consumes a fighter record and the distance of a target from the (fighter's) base. ;
+It determines whether the fighter can reach the intended target. Returns T if it can; Otherwise NIL." ;
+(> (jet-fighter-range jf) distance))	;
 ;; Can also be coded: (> (jet-fighter-range jf) distance)
 
 ;; JetFighter -> JetFighter
@@ -260,11 +305,50 @@ The struct is modified."
 ;; time->seconds : Time -> Number
 (defun time->seconds (a-time)
   "Returns the current TIME as a number of seconds since midnight.
+
+EXAMPLES:
 given: 12hrs 30mins 2secs, expect: 45002
 given: 1hr 30mins, expect: 5400
 given: 1hr, expect: 3600
 given: 1min, expect: 60
-given: 1sec, expect: 1"
+given: 1sec, expect: 1
+
+SIDE EFFECTS:
+None. Time remains unmodified"
   (+ (* (time-hours a-time) 60 60)
      (* (time-minutes a-time) 60)
      (time-seconds a-time)))
+
+;; distance-to-0: Pixel -> Number
+;; To compute the distance of A-PIXEL to the origin
+;; (defun distance-to-0 (a-pixel) (declare (ignore a-pixel)) 0) ; stub
+;; <template from POSN>
+
+(defun distance-to-0 (coord)
+  "To compute the distance of A-PIXEL to the origin.
+
+EXAMPLES:
+given: 1, expect: 1
+given: (make-posn :x 5 :y 2), expect: 5.3851647
+
+SIDE EFFECTS:
+None."
+  (typecase coord
+    (number coord)
+    (posn (sqrt (+ (expt (posn-x coord) 2)
+		   (expt (posn-y coord) 2))))))
+
+;; perimeter : Shape -> Number
+;; To compute the perimeter of a shape
+(defun perimeter (shape) 0)
+
+;; (defun perimeter (shape)
+;;   (typecase shape
+;;     (circle (values
+;; 	     (posn-x (circle-pos shape))
+;; 	     (posn-y (circle-pos shape))
+;; 	     (circle-s shape)))
+;;     (square (values
+;; 	     (posn-x (square-pos shape))
+;; 	     (posn-y (square-pos shape))
+;; 	     (square-s shape)))))

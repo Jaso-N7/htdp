@@ -141,6 +141,13 @@ and :SECONDS are numbers.
 and :SECONDS do not exceed 59"
   hours minutes seconds)
 
+;; Words is a structure:
+;;   (make-words Symbol Symbol Symbol)
+(defstruct words
+  "Represents three-letter words. Each symbol is a letter
+of the word."
+  first-letter second-letter last-letter)
+
 ;;; =====================================================================
 ;;;; FUNCTIONS:
 

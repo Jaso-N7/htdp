@@ -2,6 +2,7 @@
   (:documentation "Test package for Compound Data.")
   (:use :cl :ptester)
   (:import-from :htdc
+		;; JetFighter
 		#:within-range
 		#:reduce-range
 		#:make-jet-fighter
@@ -9,7 +10,16 @@
 		#:jet-fighter-designation
 		#:jet-fighter-acceleration
 		#:jet-fighter-top-speed
-		#:jet-fighter-range)
+		#:jet-fighter-range
+
+		;; Time
+		#:time->seconds
+		#:make-time
+		#:copy-time
+		#:time-p
+		#:time-hours
+		#:time-minutes
+		#:time-seconds)
   (:export #:test-compound-data))
 
 (in-package :section-6-tests)
@@ -52,6 +62,32 @@
 	    :test #'=)
 
       (incf ok *test-successes*)
-      (incf bad *test-errors*)))
+      (incf bad *test-errors*))
+    (terpri)
+
+    (with-tests (:name "TIME->SECONDS: Can reduce time to seconds.")
+      (test 45002 (htdc:time->seconds (make-time
+				       :hours 12
+				       :minutes 30
+				       :seconds 2)))
+      (test 5400 (htdc:time->seconds (make-time
+				      :hours 1
+				      :minutes 30)))
+      (test 3782 (htdc:time->seconds (make-time
+				      :hours 1
+				      :minutes 3
+				      :seconds 2)))
+      (test 3600 (htdc:time->seconds (make-time
+				      :hours 1)))
+      (test 60 (htdc:time->seconds (make-time
+				    :minutes 1)))
+      (test 1 (htdc:time->seconds (make-time
+				   :seconds 1)))
+      ;; No one can make time
+      (test 0 (htdc:time->seconds (make-time)))
+
+      (incf ok *test-successes*)
+      (incf bad *test-errors*))
+    (terpri))
 
   (list ok bad))

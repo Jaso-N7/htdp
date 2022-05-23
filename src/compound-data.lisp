@@ -10,12 +10,20 @@ and problem sets.")
   (:export
    #:within-range
    #:reduce-range
+   #:time->seconds
    #:make-jet-fighter
+   #:copy-jet-fighter
    #:jet-fighter-p
    #:jet-fighter-designation
    #:jet-fighter-acceleration
    #:jet-fighter-top-speed 
-   #:jet-fighter-range))
+   #:jet-fighter-range
+   #:make-time
+   #:copy-time
+   #:time-p
+   #:time-hours
+   #:time-minutes
+   #:time-seconds))
 
 (in-package :htdc)
 
@@ -180,14 +188,26 @@ where :ARTIST and :TITLE are Strings and
 
 |#
 
-;; A Clock is a structure:
-;;   (make-clock Number Number Number)
-(defstruct clock
-  "Represents points in time since midnight, where :HOURS :MINUTES
-and :SECONDS are numbers.
+;; A Time is a structure:
+;;   (make-time Number Number Number)
+(defstruct time
+  "Represents points in time since midnight,
+ where :HOURS :MINUTES and :SECONDS are numbers.
 :HOURS does not exceed 23 (can be limited to 12); whereas :MINUTES
 and :SECONDS do not exceed 59"
-  hours minutes seconds)
+  (hours 0) 
+  (minutes 0)
+  (seconds 0))
+
+#| TEMPLATE:
+
+;; fn-for-time : Time -> ???
+(defun fn-for-time (a-time)
+  (values (time-hours a-time)
+	  (time-minutes a-time)
+	  (time-seconds a-time)))
+
+|#
 
 ;; Words is a structure:
 ;;   (make-words Symbol Symbol Symbol)
@@ -195,6 +215,8 @@ and :SECONDS do not exceed 59"
   "Represents three-letter words. Each symbol is a letter
 of the word from 'A to 'Z."
   first-letter second-letter last-letter)
+
+
 
 ;;; =====================================================================
 ;;;; FUNCTIONS:
@@ -226,3 +248,20 @@ The struct is modified."
    :acceleration (jet-fighter-acceleration jf) 	; Number
    :top-speed (jet-fighter-top-speed jf)	; Number
    :range (* 80/100 (jet-fighter-range jf))))	; Number
+
+;; Time -> Number
+;; Consumes TIME and produces the number of seconds since midnight
+;; (defun time->seconds (a-time) (declare (ignore a-time)) 0) ; stub
+;; <template from TIME>
+
+;; time->seconds : Time -> Number
+(defun time->seconds (a-time)
+  "Returns the current TIME as a number of seconds since midnight.
+given: 12hrs 30mins 2secs, expect: 45002
+given: 1hr 30mins, expect: 5400
+given: 1hr, expect: 3600
+given: 1min, expect: 60
+given: 1sec, expect: 1"
+  (+ (* (time-hours a-time) 60 60)
+     (* (time-minutes a-time) 60)
+     (time-seconds a-time)))

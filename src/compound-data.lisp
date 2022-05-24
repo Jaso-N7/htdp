@@ -251,21 +251,19 @@ of the word from 'A to 'Z."
 (defstruct circle pos s)
 (defstruct square pos s)
 
-#| TEMPLATE (Shape):
+ ;; TEMPLATE (Shape):
 
 ;; fn-for-shape : Shape -> ???
 (defun fn-for-shape (shape)
   (typecase shape
     (circle (values
-	     (posn-x (circle-pos shape))
-	     (posn-y (circle-pos shape))
+	     (fn-for-posn (circle-pos shape))
 	     (circle-s shape)))
     (square (values
-	     (posn-x (square-pos shape))
-	     (posn-y (square-pos shape))
+	     (fn-for-posn (square-pos shape))
 	     (square-s shape)))))
 
-|#					
+			
 					
 ;;; ===================================================================== 
 ;;;; FUNCTIONS:				

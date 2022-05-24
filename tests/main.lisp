@@ -8,6 +8,8 @@
 		#:test-section-5)
   (:import-from :section-6-tests
 		#:test-compound-data)
+  (:import-from :tests/zoo
+		#:zoo-examples)
   (:export :resolve))
 
 (in-package :htdp/tests)
@@ -24,10 +26,11 @@
 			 (test-functions ok bad)
 			 (test-examples ok bad)
 			 (test-section-5 ok bad)
-			 (test-compound-data ok bad))))
+			 (test-compound-data ok bad)
+			 (zoo-examples ok bad))))
 
       (princ "Examples revealed the following:")
-      (format t "~&Total Successes: ~A~%Total Errors Detected: ~A~%"
+      (format t "~&|  Total Successes: ~A~%|  Total Errors Detected: ~A~%"
 	      (first accum)
 	      (second accum))
       ;; !!! TODO: Only run Property-Based Testing once (= 0 (second accum))

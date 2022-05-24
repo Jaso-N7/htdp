@@ -24,6 +24,7 @@ and problem sets.")
    ;; Shapes
    #:distance-to-0
    #:perimeter
+   #:area
    #:make-posn #:posn-p  #:copy-posn #:posn-x #:posn-y
 
    ;; Circles
@@ -90,7 +91,7 @@ and the MiG-23ML in 3.45s
 - Top speed at altitude.
 - (Combat) Range with standard armament, no drop-tanks.")
 
-#| TEMPLATE:
+#| TEMPLATE (JetFighter):
 
 ;; fn-for-jet-fighter : JetFighter -> ???
 (defun fn-for-jet-fighter (jf)
@@ -112,7 +113,7 @@ and the MiG-23ML in 3.45s
   :PRODUCER is a String of the Producer's name."
   title producer)
 
-#| TEMPLATE:
+#| TEMPLATE (Movie):
 
 ;; fn-for-movie : Movie -> ???
 (defun fn-for-movie (film)
@@ -264,20 +265,20 @@ of the word from 'A to 'Z."
 	     (posn-y (square-pos shape))
 	     (square-s shape)))))
 
-|#					;
-					;
-;;; ===================================================================== ;
-;;;; FUNCTIONS:				;
-					;
-;; JetFighter Distance -> Boolean	;
-;; (defun within-range (jf distance) NIL) ; stub ;
-;; <template used from JetFighter>	;
-					;
-(defun within-range (jf distance)	;
+|#					
+					
+;;; ===================================================================== 
+;;;; FUNCTIONS:				
+					
+;; JetFighter Distance -> Boolean	
+;; (defun within-range (jf distance) NIL) ; stub
+;; <template used from JetFighter>	
+					
+(defun within-range (jf distance)	
 "Consumes a fighter record and the distance of a target from the (fighter's) base. ;
 It determines whether the fighter can reach the intended target. Returns T if it can; Otherwise NIL." ;
 (> (jet-fighter-range jf) distance))	;
-;; Can also be coded: (> (jet-fighter-range jf) distance)
+;; Can also be coded: (> distance (jet-fighter-range jf))
 
 ;; JetFighter -> JetFighter
 ;; (defun reduce-range (jf) jf) ; stub
@@ -339,12 +340,27 @@ None."
 		   (expt (posn-y coord) 2))))))
 
 ;; perimeter : Shape -> Number
-;; To compute the perimeter of a shape
 ;; (defun perimeter (shape) 0) ; stub
 ;; <template from POSN>
 
 (defun perimeter (shape)
+  "To compute the perimeter of a shape"
   (typecase shape
     (circle (* (* 2 (circle-s shape))
 	       pi))
     (square (* (square-s shape) 4))))
+
+;; area : Shape -> Number
+;; (defun area (shape) (declare (ignore shape)) 0) ; stub
+;; <template from SHAPE>
+
+(defun area (shape)
+  "Consumes a shape and computes the area.
+EXAMPLES (Circle) :
+given: 5, expect: 78.5 
+
+SIDE EFFECTS:
+None."
+  (typecase shape
+    (circle (* pi (expt (circle-s shape) 2)))
+    (square (expt (square-s shape) 2))))

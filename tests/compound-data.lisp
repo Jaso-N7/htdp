@@ -14,17 +14,14 @@
 
 		;; Time
 		#:time->seconds
-		#:make-time
-		#:copy-time
-		#:time-p
-		#:time-hours
-		#:time-minutes
-		#:time-seconds
+		#:make-time #:copy-time
+		#:time-p #:time-hours #:time-minutes #:time-seconds
 
 
 		;; Shapes
 		#:distance-to-0
 		#:perimeter
+		#:area
 		#:make-posn #:posn-x #:posn-y
 		#:make-circle #:circle-pos #:circle-s
 		#:make-square #:square-pos #:square-s)
@@ -119,7 +116,28 @@
 
       (incf ok *test-successes*)
       (incf bad *test-errors*))
-    
+
+    (terpri)
+    (with-tests (:name "AREA: Calculates a Shapes perimeter.")
+      ;; Area of a Square = side x side = side^2 square units
+      (test (* 4 4)
+	    (htdc:area (htdc:make-square
+			:pos (htdc:make-posn :x 10 :y 10)
+			:s 4))
+	    :test #'=)
+      ;; Area of a Circle = pi.r^2
+      (test (* pi (* 20 20)) (htdc:area (htdc:make-circle
+					 :pos (htdc:make-posn :x 30 :y 30)
+					 :s 20))
+	    :test #'=)
+      (test 78.5 (htdc:area (htdc:make-circle 
+			     :pos (htdc:make-posn 
+				   :x 0 :y 0) 
+			     :s 5)))
+
+      (incf ok *test-successes*)
+      (incf bad *test-errors*))
+
     (terpri))
 
   (list ok bad))

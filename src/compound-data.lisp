@@ -34,6 +34,11 @@ and problem sets.")
    ;; Squares
    #:square
    #:make-square #:copy-square #:square-p #:square-nw #:square-width
+
+   ;; Rectangles
+   #:rectangle
+   #:make-rectangle #:copy-rectangle #:rectangle-p #:rectangle-corner
+   #:rectangle-width #:rectangle-length
    ))
 
 (in-package :htdc)
@@ -252,6 +257,7 @@ of the word from 'A to 'Z."
   center radius)
 
 ;; TEMPLATE:
+
 #+(or)
 ;; f-for-circle : Circle -> ???
 (defun f-for-circle (c)
@@ -266,6 +272,7 @@ of the word from 'A to 'Z."
   nw width)
 
 ;; TEMPLATE:
+
 #+(or)
 ;; f-for-square : Square -> ???
 (defun f-for-square (sq)
@@ -273,17 +280,38 @@ of the word from 'A to 'Z."
    (fn-for-posn (square-nw sq))
    (square-width sq)))
 
-;; A Shape is either:
-;; - A Circle or
-;; - A Square
+;; A Rectangle is a structure:
+;;  (make-rectangle c w h)
+;; where C is a Posn, W and H are Numbers
+(defstruct rectangle
+  "Represents a Rectangle with its Upper-Left :CORNER being its
+position of type Posn and its :WIDTH and :HEIGHT being Numbers."
+  corner width height)
 
 ;; TEMPLATE:
+
+#+(or)
+;; f-for-rectangle : Rectangle -> ???
+(defun f-for-rectangle (r)
+  (values
+   (rectangle-corner r)
+   (rectangle-width r)
+   (rectangle-height r)))
+
+;; A Shape is either:
+;; - A Circle,
+;; - A Square or
+;; - A Rectangle
+
+;; TEMPLATE:
+
 #+(or)
 ;; fn-for-shape : Shape -> ???
 (defun fn-for-shape (shape)
   (typecase shape
     (circle (f-for-circle shape))
-    (square (f-for-square shape))))
+    (square (f-for-square shape))
+    (rectangle (f-for-rectangle shape))))
 					
 ;;; ===================================================================== 
 ;;;; FUNCTIONS:				
@@ -364,7 +392,8 @@ None."
   "To compute the perimeter of a shape"
   (typecase shape
     (circle (perimeter-circle shape))
-    (square (perimeter-square shape))))
+    (square (perimeter-square shape))
+    (rectangle (perimeter-rectangle shape))))
 
 ;; perimeter-circle : Circle -> Number
 ;; to compute the perimeter of a circle
@@ -378,6 +407,16 @@ None."
 (defun perimeter-square (s)
   "Given a Square S, output its perimeter"
   (* (square-width s) 4))
+
+;; perimeter-rectangle : Rectangle -> Number
+;; Computes the perimeter of a Rectangle
+;; (defun perimeter-rectangle (r) (declare (ignore r)) 0) ; stub
+
+(defun perimeter-rectangle (r)
+  "Given a rectangle, output its perimeter"
+  (* 2
+     (+ (rectangle-width r)
+	(rectangle-height r))))
 
 ;; area : Shape -> Number
 ;; (defun area (shape) (declare (ignore shape)) 0) ; stub

@@ -1,30 +1,6 @@
 (defpackage section-6-tests
   (:documentation "Test package for Compound Data.")
-  (:use :cl :ptester)
-  (:import-from :htdc
-		;; JetFighter
-		#:within-range
-		#:reduce-range
-		#:make-jet-fighter
-		#:jet-fighter-p
-		#:jet-fighter-designation
-		#:jet-fighter-acceleration
-		#:jet-fighter-top-speed
-		#:jet-fighter-range
-
-		;; Time
-		#:time->seconds
-		#:make-time #:copy-time
-		#:time-p #:time-hours #:time-minutes #:time-seconds
-
-
-		;; Shapes
-		#:distance-to-0
-		#:perimeter
-		#:area
-		#:make-posn #:posn-x #:posn-y
-		#:make-circle #:circle-center #:circle-radius
-		#:make-square #:square-nw #:square-width)
+  (:use :cl :ptester :htdc)
   (:export #:test-compound-data))
 
 (in-package :section-6-tests)
@@ -112,6 +88,11 @@
       (test (* 40 pi) (htdc:perimeter (htdc:make-circle
 				       :center (htdc:make-posn :x 30 :y 30)
 				       :radius 20))
+	    :test #'=)
+      (test 14 (htdc:perimeter (htdc:make-rectangle
+				:corner (htdc:make-posn :x 10 :y 10)
+				:width 3
+				:height 4))
 	    :test #'=)
 
       (incf ok *test-successes*)

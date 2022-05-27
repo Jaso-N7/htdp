@@ -235,7 +235,7 @@ of the word from 'A to 'Z."
   x y)
 
 ;; TEMPLATE:
-#+(and)
+#+(or)
 ;; fn-for-posn : posn -> ???
 (defun fn-for-posn (coord)
   (values (posn-x coord)
@@ -252,7 +252,7 @@ of the word from 'A to 'Z."
   center radius)
 
 ;; TEMPLATE:
-#+(and)
+#+(or)
 ;; f-for-circle : Circle -> ???
 (defun f-for-circle (c)
   (values
@@ -266,7 +266,7 @@ of the word from 'A to 'Z."
   nw width)
 
 ;; TEMPLATE:
-#+(and)
+#+(or)
 ;; f-for-square : Square -> ???
 (defun f-for-square (sq)
   (values
@@ -278,7 +278,7 @@ of the word from 'A to 'Z."
 ;; - A Square
 
 ;; TEMPLATE:
-#+(and)
+#+(or)
 ;; fn-for-shape : Shape -> ???
 (defun fn-for-shape (shape)
   (typecase shape
@@ -363,9 +363,21 @@ None."
 (defun perimeter (shape)
   "To compute the perimeter of a shape"
   (typecase shape
-    (circle (* (* 2 (circle-s shape))
-	       pi))
-    (square (* (square-s shape) 4))))
+    (circle (perimeter-circle shape))
+    (square (perimeter-square shape))))
+
+;; perimeter-circle : Circle -> Number
+;; to compute the perimeter of a circle
+(defun perimeter-circle (c)
+  "Computes the perimeter of a circle"
+  (* (* 2 (circle-radius c))
+     pi))
+
+;; perimeter-square : Square -> Number
+;; Computes the perimeter of a Square
+(defun perimeter-square (s)
+  "Given a Square S, output its perimeter"
+  (* (square-width s) 4))
 
 ;; area : Shape -> Number
 ;; (defun area (shape) (declare (ignore shape)) 0) ; stub
@@ -379,5 +391,5 @@ given: 5, expect: 78.5
 SIDE EFFECTS:
 None."
   (typecase shape
-    (circle (* pi (expt (circle-s shape) 2)))
-    (square (expt (square-s shape) 2))))
+    (circle (* pi (expt (circle-radius shape) 2)))
+    (square (expt (square-width shape) 2))))

@@ -23,8 +23,8 @@
 		#:perimeter
 		#:area
 		#:make-posn #:posn-x #:posn-y
-		#:make-circle #:circle-pos #:circle-s
-		#:make-square #:square-pos #:square-s)
+		#:make-circle #:circle-center #:circle-radius
+		#:make-square #:square-nw #:square-width)
   (:export #:test-compound-data))
 
 (in-package :section-6-tests)
@@ -106,12 +106,12 @@
     (terpri)
     (with-tests (:name "PERIMETER: Calculates a Shapes perimeter.")
       (test 16 (htdc:perimeter (htdc:make-square
-				:pos (htdc:make-posn :x 10 :y 10)
-				:s 4))
+				:nw (htdc:make-posn :x 10 :y 10)
+				:width 4))
 	    :test #'=)
       (test (* 40 pi) (htdc:perimeter (htdc:make-circle
-				       :pos (htdc:make-posn :x 30 :y 30)
-				       :s 20))
+				       :center (htdc:make-posn :x 30 :y 30)
+				       :radius 20))
 	    :test #'=)
 
       (incf ok *test-successes*)
@@ -122,18 +122,18 @@
       ;; Area of a Square = side x side = side^2 square units
       (test (* 4 4)
 	    (htdc:area (htdc:make-square
-			:pos (htdc:make-posn :x 10 :y 10)
-			:s 4))
+			:nw (htdc:make-posn :x 10 :y 10)
+			:width 4))
 	    :test #'=)
       ;; Area of a Circle = pi.r^2
       (test (* pi (* 20 20)) (htdc:area (htdc:make-circle
-					 :pos (htdc:make-posn :x 30 :y 30)
-					 :s 20))
+					 :center (htdc:make-posn :x 30 :y 30)
+					 :radius 20))
 	    :test #'=)
       (test 78.5 (htdc:area (htdc:make-circle 
-			     :pos (htdc:make-posn 
+			     :center (htdc:make-posn 
 				   :x 0 :y 0) 
-			     :s 5)))
+			     :radius 5)))
 
       (incf ok *test-successes*)
       (incf bad *test-errors*))

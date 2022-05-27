@@ -29,11 +29,11 @@ and problem sets.")
 
    ;; Circles
    #:circle
-   #:make-circle #:copy-circle #:circle-p #:circle-pos #:circle-s
+   #:make-circle #:copy-circle #:circle-p #:circle-center #:circle-radius
 
    ;; Squares
    #:square
-   #:make-square #:copy-square #:square-p #:square-pos #:square-s
+   #:make-square #:copy-square #:square-p #:square-nw #:square-width
    ))
 
 (in-package :htdc)
@@ -234,38 +234,56 @@ of the word from 'A to 'Z."
   "Represents the Cardinal points on an X,Y axis"
   x y)
 
-#| TEMPLATE:
-
+;; TEMPLATE:
+#+(and)
 ;; fn-for-posn : posn -> ???
 (defun fn-for-posn (coord)
   (values (posn-x coord)
 	  (posn-y coord)))
 
-|#
-
 ;; A Pixel is either:
 ;; - Number, or
 ;; - Posn structure.
 
+;; A Circle is a structure:
+;;  (make-circle p s)
+;; where P is a Posn and S a Number
+(defstruct circle 
+  center radius)
+
+;; TEMPLATE:
+#+(and)
+;; f-for-circle : Circle -> ???
+(defun f-for-circle (c)
+  (values
+   (fn-for-posn (circle-center c))
+   (circle-radius c)))
+
+;; A Square is a structure:
+;;   (make-square p s)
+;; where P is a Posn and S a Number
+(defstruct square
+  nw width)
+
+;; TEMPLATE:
+#+(and)
+;; f-for-square : Square -> ???
+(defun f-for-square (sq)
+  (values
+   (fn-for-posn (square-nw sq))
+   (square-width sq)))
+
 ;; A Shape is either:
-;; - A Circle structure: (make-circle Posn Number)
-;; - A Square structure: (make-square Posn Number)
-(defstruct circle pos s)
-(defstruct square pos s)
+;; - A Circle or
+;; - A Square
 
-#| TEMPLATE (Shape):
-
+;; TEMPLATE:
+#+(and)
 ;; fn-for-shape : Shape -> ???
 (defun fn-for-shape (shape)
   (typecase shape
-    (circle (values
-	     (fn-for-posn (circle-pos shape))
-	     (circle-s shape)))
-    (square (values
-	     (fn-for-posn (square-pos shape))
-	     (square-s shape)))))
-
-|#
+    (circle (f-for-circle shape))
+    (square (f-for-square shape))))
 					
 ;;; ===================================================================== 
 ;;;; FUNCTIONS:				

@@ -10,7 +10,7 @@
 ;;;
 ;;;
 ;;; TESTS:
-;;; To run the tests, (htdf:test-functions)
+;;; To run the tests, (asdf:test-system :htdp)
 ;;; 
 ;;;; How to Design Functions Recipe
 
@@ -38,9 +38,9 @@ Section: 3.1")
 ;;;; FUNCTION DEFINITIONS
 
 #| ======= PROBLEM: =======
-Design a function that consumes a number and produces twice that number. ;
-Call your function double. Follow the HtDF recipe and show the stub and ;
-template				;
+Design a function that consumes a number and produces twice that number. 
+Call your function double. Follow the HtDF recipe and show the stub and 
+template				
 ===========================|#
 
 ;; Number -> Number

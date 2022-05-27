@@ -8,7 +8,7 @@
 		#:test-section-5)
   (:import-from :section-6-tests
 		#:test-compound-data)
-  (:import-from :tests/zoo
+  (:import-from :section-7-tests
 		#:zoo-examples)
   (:export :resolve))
 

@@ -14,7 +14,8 @@
    #:monkey #:make-monkey #:copy-monkey #:monkey-p #:monkey-intelligence #:monkey-spacev
 
    ;; Vehicles
-   :bus :make-bus :bus-p :bus-route :bus-doors :bus-capacity :bus-has-conducter-p 
+   :bus :make-bus :bus-p :bus-route :bus-doors :bus-capacity :bus-has-conducter-p
+   :train :make-train :train-p :copy-train
    ))
 
 (in-package :mixed)
@@ -157,12 +158,13 @@ in accidents) and the
    (car-has-turbo-p c)))
 
 ;; A Train is a structure:
-;;   (make-train route length type has-conducter-p)
-;; where: ROUTE is a Symbol, LENGTH and capacity are Numbers, TYPE is a Symbol of
+;;   (make-train route length capacity type has-conducter-p)
+;; where: ROUTE is a Symbol, LENGTH and CAPACITY are Numbers, TYPE is a Symbol of
 ;;        either 'tram, 'bullet, 'steam or 'subway and HAS-CONDUCTER-P is a Boolean
 (defstruct train
   route
   length
+  capacity
   (type 'subway)
   (has-conducter-p nil))
 

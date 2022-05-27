@@ -8,7 +8,7 @@
 			((:file "htdf")
 			 (:file "htdd")
 			 (:file "compound-data")
-			 (:file "zoo")
+			 (:file "mixed-data")
 			 (:file "main")
 			 (:file "guess"))))
   :description "Learning How to Design Programs"
@@ -21,7 +21,7 @@
 	       :ptester)
   :components ((:module "tests"
 		:components
-		((:file "zoo")
+		((:file "mixed-data")
 		 (:file "compound-data")
 		 (:file "guess")
 		 (:file "htdf")

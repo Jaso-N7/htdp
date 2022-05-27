@@ -7,10 +7,13 @@
   (:documentation "Collection of Zoo Animals.")
   (:use :cl)
   (:export
+   ;; Zoo
    #:fits-p
-   #:make-spider
-   #:make-elephant
-   #:make-monkey
+   #:spider #:make-spider #:copy-spider #:spider-p #:spider-legs #:spider-space
+   #:elephant #:make-elephant #:copy-elephant #:elephant-p #:elephant-space
+   #:monkey #:make-monkey #:copy-monkey #:monkey-p #:monkey-intelligence #:monkey-spacev
+
+   ;; Vehicles
    ))
 
 (in-package :zoo)
@@ -84,6 +87,8 @@ in accidents) and the
    (monkey-space m)))
 
 |#
+
+
 
 ;; =============================================================================
 ;;;; FUNCTIONS

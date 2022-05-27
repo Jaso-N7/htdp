@@ -12,25 +12,27 @@ and problem sets.")
    #:within-range
    #:reduce-range
    #:time->seconds
-   #:make-jet-fighter #:copy-jet-fighter #:jet-fighter-p
+   #:jet-fighter #:make-jet-fighter #:copy-jet-fighter #:jet-fighter-p
    #:jet-fighter-designation
    #:jet-fighter-acceleration
    #:jet-fighter-top-speed
    #:jet-fighter-range
 
    ;; Time
-   #:make-time #:copy-time #:time-p #:time-hours #:time-minutes #:time-seconds
+   #:time->seconds
+   #:time #:make-time #:copy-time #:time-p #:time-hours #:time-minutes
+   #:time-seconds
 
    ;; Shapes
-   #:distance-to-0
-   #:perimeter
-   #:area
-   #:make-posn #:posn-p  #:copy-posn #:posn-x #:posn-y
+   #:distance-to-0 #:perimeter #:area
+   #:posn #:make-posn #:posn-p  #:copy-posn #:posn-x #:posn-y
 
    ;; Circles
+   #:circle
    #:make-circle #:copy-circle #:circle-p #:circle-pos #:circle-s
 
    ;; Squares
+   #:square
    #:make-square #:copy-square #:square-p #:square-pos #:square-s
    ))
 
@@ -128,11 +130,11 @@ and the MiG-23ML in 3.45s
 (defstruct girlfriend
   "Contains the details of a girlfriend, where
 :NAME is a String of the full name and 
-:HAIR and :EYES are Symbol used to describe colours.
+:HAIR and :EYES are Symbols used to describe colours.
 :PHONE is also a Symbol "
   name hair eyes phone)
 
-#| TEMPLATE:
+#| TEMPLATE (Girlfriend):
 
 ;; fn-for-gf : Girlfriend -> ???
 (defun fn-for-gf (gf)
@@ -151,7 +153,7 @@ and the MiG-23ML in 3.45s
 :NUMBER is a Symbol representing her contact. "
   name number)
 
-#| TEMPLATE:
+#| TEMPLATE (Cheerleader): 
 
 ;; fn-for-cheerleader : Cheerleader -> ???
 (defun fn-for-cheerleader (cl)
@@ -251,7 +253,7 @@ of the word from 'A to 'Z."
 (defstruct circle pos s)
 (defstruct square pos s)
 
- ;; TEMPLATE (Shape):
+#| TEMPLATE (Shape):
 
 ;; fn-for-shape : Shape -> ???
 (defun fn-for-shape (shape)
@@ -263,7 +265,7 @@ of the word from 'A to 'Z."
 	     (fn-for-posn (square-pos shape))
 	     (square-s shape)))))
 
-			
+|#
 					
 ;;; ===================================================================== 
 ;;;; FUNCTIONS:				
@@ -273,10 +275,9 @@ of the word from 'A to 'Z."
 ;; <template used from JetFighter>	
 					
 (defun within-range (jf distance)	
-"Consumes a fighter record and the distance of a target from the (fighter's) base. ;
-It determines whether the fighter can reach the intended target. Returns T if it can; Otherwise NIL." ;
-(> (jet-fighter-range jf) distance))	;
-;; Can also be coded: (> distance (jet-fighter-range jf))
+  "Consumes a fighter record and the distance of a target from the (fighter's) base.
+It determines whether the fighter can reach the intended target. Returns T if it can; Otherwise NIL."
+  (> (jet-fighter-range jf) distance))
 
 ;; JetFighter -> JetFighter
 ;; (defun reduce-range (jf) jf) ; stub

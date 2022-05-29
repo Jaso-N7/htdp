@@ -14,8 +14,8 @@
    #:monkey #:make-monkey #:copy-monkey #:monkey-p #:monkey-intelligence #:monkey-spacev
 
    ;; Vehicles
-   :bus :make-bus :bus-p :bus-route :bus-doors :bus-capacity :bus-has-conducter-p
-   :train :make-train :train-p :copy-train
+   #:bus #:make-bus #:bus-p #:bus-route #:bus-doors #:bus-capacity #:bus-has-conducter-p
+   #:train #:make-train #:train-p #:copy-train
    ))
 
 (in-package :mixed)
@@ -198,3 +198,24 @@ Does a spider take up less space with less legs?"
     (spider (> cage (spider-space animal)))
     (elephant (> cage (elephant-space animal)))
     (monkey (> cage (monkey-space animal)))))
+
+;; Ex: 7.5.1
+;; area-of-disk : Number -> Float
+;; to compute the area of a disk with radius V, if V is a Number
+;; (defun area-of-disk (v) 0) ; stub
+
+(defun area-of-disk (v)
+  "Given a radius of Number V, compute the area of a disk.
+EXAMPLE:
+given: 3, expect: 28.274333882308138D0"
+  (assert (and  (numberp v) (plusp v))
+	  (v) 
+	  "Expected a Positive Number")
+  (* pi (expt v 2)))
+
+;; EXAMPLES:
+(ptester:test 28.274333882308138D0 (mixed::area-of-disk 3))
+(ptester:test-error (mixed::area-of-disk -3))
+(ptester:test-error (mixed::area-of-disk 0))
+(ptester:test-error (mixed::area-of-disk 'my-disk))
+

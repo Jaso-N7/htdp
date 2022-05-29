@@ -69,4 +69,36 @@
 
   (terpri)
 
+  (with-tests (:name "CHECKED-SPEED-VECTOR: Can create a Speed-Vector")
+
+    (test-error (mixed:checked-make-vec 0 0))
+    (test-error (mixed:checked-make-vec -1 0))
+    (test-error (mixed:checked-make-vec 0 1))
+    (test-error (mixed:checked-make-vec -1 1))
+    (test-error (mixed:checked-make-vec 1 -1))
+    (test-error (mixed:checked-make-vec -1 'not-a-number)
+		:condition-type 'simple-error
+		:include-subtypes t)
+    (test-error (mixed:checked-make-vec 'not-a-number -1)
+		:condition-type 'type-error
+		:include-subtypes t)
+    (test-error (mixed:checked-make-vec 'not-a-number 15)
+		:condition-type 'type-error
+		:include-subtypes t)
+    (test-error (mixed:checked-make-vec 15 'not-a-number)
+		:condition-type 'type-error
+		:include-subtypes t)
+    (test-error (mixed:checked-make-vec 'may-be-a-number 'not-a-number)
+		:condition-type 'type-error
+		:include-subtypes t)
+    (test T (mixed:speed-vector-p (mixed:checked-make-vec 1 1)))
+    (test (mixed::make-speed-vector :x 10 :y 10)
+	  (mixed:checked-make-vec 10 10)
+	  :test #'equalp)
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+  
+  (terpri)
+
   (list ok bad))

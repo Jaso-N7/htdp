@@ -16,7 +16,11 @@
    ;; Vehicles
    #:bus #:make-bus #:bus-p #:bus-route #:bus-doors #:bus-capacity #:bus-has-conducter-p
    #:train #:make-train #:train-p #:copy-train
-   ))
+
+   ;; Speed-Vector
+   #:checked-make-vec
+   #:speed-vector #:copy-speed-vector #:speed-vector-p
+   #:speed-vector-x #:speed-vector-y))
 
 (in-package :mixed)
 
@@ -180,6 +184,22 @@ in accidents) and the
    (train-type train)
    (train-has-conducter-p train)))
 
+;; Ex 7.5.3
+;; A Speed-Vector is a structure:
+;;   (make-speed-vector x y)
+;; where both X and Y are positive numbers
+(defstruct speed-vector
+  x y)
+
+;; TEMPLATE
+
+#+(or)
+;; f-for-speed-vec : Speed-Vector -> ???
+(defun f-for-speed-vec (v)
+  (values
+   (speed-vector-x v)
+   (speed-vector-y v)))
+
 ;; =============================================================================
 ;;;; FUNCTIONS
 
@@ -213,9 +233,16 @@ given: 3, expect: 28.274333882308138D0"
 	  "Expected a Positive Number")
   (* pi (expt v 2)))
 
-;; EXAMPLES:
-(ptester:test 28.274333882308138D0 (mixed::area-of-disk 3))
-(ptester:test-error (mixed::area-of-disk -3))
-(ptester:test-error (mixed::area-of-disk 0))
-(ptester:test-error (mixed::area-of-disk 'my-disk))
+;; EXAMPLES: See Tests
 
+;; Ex: 7.5.3
+;; checked-make-vec : Number Number -> Speed-Vector
+;; Ensures arguments to MAKE-SPEED-VECTOR are positive numbers
+(defun checked-make-vec (x y)
+  "An abstraction to make-speed-vector that ensures only the correct
+values are used. Once checked, returns a Speed-Vector"
+  (assert (and (plusp x)
+	       (plusp y))
+	  (x y)
+	  "Expecting both inputs to be Positive Numbers.")
+  (make-speed-vector :x x :y y))

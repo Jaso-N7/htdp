@@ -382,18 +382,20 @@ None."
   (typecase coord
     (number coord)
     (posn (sqrt (+ (expt (posn-x coord) 2)
-		   (expt (posn-y coord) 2))))))
+		   (expt (posn-y coord) 2))))
+    (otherwise (error "~A is not a PIXEL" coord))))
 
 ;; perimeter : Shape -> Number
 ;; (defun perimeter (shape) 0) ; stub
 ;; <template from POSN>
 
 (defun perimeter (shape)
-  "To compute the perimeter of a shape"
+  "To compute the perimeter of a Shape"
   (typecase shape
     (circle (perimeter-circle shape))
     (square (perimeter-square shape))
-    (rectangle (perimeter-rectangle shape))))
+    (rectangle (perimeter-rectangle shape))
+    (otherwise (error "~A is not an expected SHAPE." shape))))
 
 ;; perimeter-circle : Circle -> Number
 ;; to compute the perimeter of a circle

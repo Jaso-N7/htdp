@@ -15,14 +15,12 @@
   ;; "Consumes two numbers, GUESS and TARGET. Player tries to guess the target."
   ;; (defun check-guess (guess target) '(too small)) ; stub
 
-  #| TEMPLATE: check-guess
-  				       	; ; ;
-  (defun check-guess (guess target)	; ; ;
-  (cond ((= guess target) (list guess))	; ; ;
-  ((< guess target) (list guess))	; ; ;
-  ((> guess target) (list guess))))	; ; ; ; ;
-					; ; ;
-  |#
+  ;; TEMPLATE:
+  #+(or)
+  (defun check-guess (guess target)
+    (cond ((= guess target) (list guess))
+	  ((< guess target) (list guess))
+	  ((> guess target) (list guess))))
 
   (defun check-guess (guess &optional (target target))
     "Consumes two numbers, GUESS and TARGET. Player tries to guess the target."

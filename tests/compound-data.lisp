@@ -75,6 +75,7 @@
       (test 0 (distance-to-0 0) :test #'=)
       (test 10 (distance-to-0 10) :test #'=)
       (test 5.3851647 (distance-to-0 (htdc:make-posn :x 5 :y 2)) :test #'=)
+      (test-error (distance-to-0 '(5 2)))
 
       (incf ok *test-successes*)
       (incf bad *test-errors*))
@@ -94,6 +95,7 @@
 				:width 3
 				:height 4))
 	    :test #'=)
+      (test-error (htdc:perimeter 'octagon))
 
       (incf ok *test-successes*)
       (incf bad *test-errors*))

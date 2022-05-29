@@ -20,17 +20,18 @@ Ref: https://htdp.org/2022-2-9/Book/part_one.html#%28part._ch~3ahtdp%29
 Section: 3.1")
   (:use :cl :ptester)
   (:export
-   :double 
-   :pluralize
-   :string-first
-   :string-last
-   :string-rest 
-   :string-remove-last
-   :profit
-   :revenue
-   :cost
-   :wage
-   :attendees))
+   #:double 
+   #:pluralize
+   #:string-first
+   #:string-last
+   #:string-rest 
+   #:string-remove-last
+   #:profit
+   #:revenue
+   #:cost
+   #:wage
+   #:attendees
+   #:is-between-5-6-p))
 
 (in-package :htdf)
 
@@ -128,8 +129,11 @@ Imagine the owner of a movie theater who has complete freedom in setting ticket 
 (defun profit (ticket-price)
   "To compute the profit as the difference between revenue and costs
 at some given TICKET-PRICE."
+  (assert (and (numberp ticket-price) (plusp ticket-price))
+	  (ticket-price)
+	  "Expected ~a to be greater than 0" 'ticket-price)
   (- (revenue ticket-price)
-     (cost ticket-price))) 	
+     (cost ticket-price)))
 
 ;; revenue : Number -> Number
 ;; (defun revenue (ticket-price) 0)  ; stub
@@ -175,3 +179,20 @@ a specific range"
 	   ((= hours 20) hours)
 	   ((= hours 65) hours)
 	   (t  0))))
+
+;; Ex 7.5.2
+;; is-between-5-6-p : Number -> Boolean
+;; to determine whether N is between 5 and 6 (exclusive)
+(defun is-between-5-6-p (n)
+  "Determines whether N is between 5 and 6 (exclusive)"
+  (check-type n number)
+  (and (< 5 n 6)))
+
+;; Examples:
+(ptester:test nil (is-between-5-6-p 5))
+(ptester:test t (is-between-5-6-p 5.25))
+(ptester:test nil (is-between-5-6-p 6))
+(ptester:test-error (is-between-5-6-p 'a-number)
+		    :condition-type 'type-error
+		    :include-subtypes t)
+

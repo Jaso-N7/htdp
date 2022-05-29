@@ -82,6 +82,9 @@
     (test 415.2 (profit 5))
     (test 889.2 (profit 4))
     (test 1063.2 (profit 3))
+    (test-error (profit -5))
+    (test-error (profit 0))
+    (test-error (profit 'big-bucks))
 
     (incf ok *test-successes*)
     (incf bad *test-errors*))

@@ -4,6 +4,10 @@
 
 ** Installation
 
+#+BEGIN_SRC common-lisp
+(ql:quickload '(:ptester :htdp))
+#+END_SRC
+
 ** Author
 
 + Jason Robinson

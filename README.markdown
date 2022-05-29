@@ -4,6 +4,8 @@
 
 ## Installation
 
+`(ql:quickload '(:ptester :htdp))`
+
 ## Author
 
 * Jason Robinson

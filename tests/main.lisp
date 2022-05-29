@@ -9,7 +9,8 @@
   (:import-from :section-6-tests
 		#:test-compound-data)
   (:import-from :section-7-tests
-		#:zoo-examples)
+		#:zoo-examples
+		#:mixed-examples)
   (:export :resolve))
 
 (in-package :htdp/tests)
@@ -22,16 +23,20 @@
 		  (bad ptester:*test-errors*))
     "Test all examples."
 
+    ;; !!! Convert into a MACRO named CALL-TESTS or CALL-WITH-TESTS
     (let ((accum (mapcar #'+
 			 (test-functions ok bad)
 			 (test-examples ok bad)
 			 (test-section-5 ok bad)
 			 (test-compound-data ok bad)
-			 (zoo-examples ok bad))))
+			 (zoo-examples ok bad)
+			 (mixed-examples ok bad))))
+      (let ((passes (first accum))
+	    (failures (second accum)))
 
-      (princ "Examples revealed the following:")
-      (format t "~&|  Total Successes: ~A~%|  Total Errors Detected: ~A~%"
-	      (first accum)
-	      (second accum))
-      ;; !!! TODO: Only run Property-Based Testing once (= 0 (second accum))
+	(princ "Examples revealed the following:")
+	(format t "~&|  Total Successes: ~A~%|  Total Errors Detected: ~A~%"
+		passes
+		failures))
+      ;; !!! TODO: Only run Property-Based Testing once (= failures 0)
       )))

@@ -5,7 +5,8 @@
 	       #:make-spider
 	       #:make-elephant
 	       #:make-monkey)
-  (:export #:zoo-examples))
+  (:export #:zoo-examples
+	   #:mixed-examples))
 
 (in-package :section-7-tests)
 
@@ -51,6 +52,21 @@
 
     (incf ok *test-successes*)
     (incf bad *test-errors*))
+  (terpri)
+
+  (list ok bad))
+
+(defun mixed-examples (ok bad)
+  "Examples for the other exercises from HtDP 1ed Section 7"
+  (with-tests (:name "AREA-OF-DISK")
+    (ptester:test 28.274333882308138D0 (mixed::area-of-disk 3))
+    (ptester:test-error (mixed::area-of-disk -3))
+    (ptester:test-error (mixed::area-of-disk 0))
+    (ptester:test-error (mixed::area-of-disk 'my-disk))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+
   (terpri)
 
   (list ok bad))

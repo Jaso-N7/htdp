@@ -12,21 +12,21 @@
 		#:TEST-ERROR 
 		#:*TEST-UNEXPECTED-FAILURES* 
 		#:TEST 
-		#:*TEST-SUCCESSES* )
-  (:import-from 
-   :htdf
-   :double
-   :pluralize
-   :string-first
-   :string-last
-   :string-rest
-   :string-remove-last
-   :profit
-   :revenue
-   :cost
-   :wage
-   :attendees)
-  (:export :test-functions))
+		#:*TEST-SUCCESSES*)
+  (:import-from :htdf
+		#:double
+		#:pluralize
+		#:string-first
+		#:string-last
+		#:string-rest
+		#:string-remove-last
+		#:profit
+		#:revenue
+		#:cost
+		#:wage
+		#:attendees
+		#:is-between-5-6-p)
+  (:export #:test-functions))
 
 (in-package :htdf-tests)
 
@@ -123,6 +123,18 @@
 
     (incf ok *test-successes*)
     (incf bad *test-errors*))
+  (terpri)
+
+  (with-tests (:name "IS-BETWEEN-5-6-P")
+    (ptester:test nil (is-between-5-6-p 5))
+    (ptester:test t (is-between-5-6-p 5.25))
+    (ptester:test nil (is-between-5-6-p 6))
+    (ptester:test-error (is-between-5-6-p 'a-number)
+			:condition-type 'type-error
+			:include-subtypes t)
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
+
   (terpri)
 
   (list ok bad))

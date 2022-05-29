@@ -188,11 +188,5 @@ a specific range"
   (check-type n number)
   (and (< 5 n 6)))
 
-;; Examples:
-(ptester:test nil (is-between-5-6-p 5))
-(ptester:test t (is-between-5-6-p 5.25))
-(ptester:test nil (is-between-5-6-p 6))
-(ptester:test-error (is-between-5-6-p 'a-number)
-		    :condition-type 'type-error
-		    :include-subtypes t)
+;; Examples: See Tests
 

@@ -80,7 +80,5 @@ determines whether it contains the name "Flatt".
 ;; contains-flatt-p : (Names) -> Boolean
 (defun contains-flatt-p (names)
   (cond ((endp names) nil)
-	((consp names)
-	 (values
-	  (first names)
-	  (rest names)))))
+	((consp names) (first names))
+	(t (rest names))))

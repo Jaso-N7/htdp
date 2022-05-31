@@ -9,6 +9,7 @@
 			 (:file "htdd")
 			 (:file "compound-data")
 			 (:file "mixed-data")
+			 (:file "large-data")
 			 (:file "main")
 			 (:file "guess"))))
   :description "Learning How to Design Programs"

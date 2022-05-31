@@ -32,6 +32,16 @@
 			  (cons "Stuttgard" '())))))
   "Exercise 130: A (Names) that contains five Names")
 
+;; Template
+#+(and)
+;; f-for-names : (Names) -> ???
+(defun f-for-names (names)
+  (cond ((endp names) nil)
+	((eq (first names)
+	     nil)
+	 T)
+	(t (f-for-names (rest names)))))
+
 ;; A (Booleans) is one of:
 ;; - '()
 ;; - (cons Boolean (Booleans))
@@ -54,7 +64,7 @@ determines whether it contains the name "Flatt".
 
 ;; (Names) -> Boolean
 ;; Determines whether "Flatt" is in a list of names
-(defun contains-flatt-p (names) nil)
+(defun contains-flatt-p (names) (declare (ignore names)) nil)
 
 ;; EXAMPLES
 (with-tests (:name "Does the list contain a specific name?")

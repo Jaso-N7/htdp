@@ -40,3 +40,25 @@
 (defparameter *lob1*
   (cons t (cons nil (cons t '())))
   "Exercise 131: An example of a list of booleans (Booleans).")
+
+;;; ============================================================================
+;;;; FUNCTIONS
+
+;; See Chapter 8.3
+#| SAMPLE PROBLEM
+You are working on the contact list for some new cell phone. The phone’s owner
+updates and consults this list on various occasions. For now, you are assigned
+the task of designing a function that consumes this list of contacts and
+determines whether it contains the name "Flatt".
+|#
+
+;; (Names) -> Boolean
+;; Determines whether "Flatt" is in a list of names
+(defun contains-flatt-p (names) nil)
+
+;; EXAMPLES
+(ptester:test NIL (contains-flatt-p '()))
+(ptester:test NIL (contains-flatt-p (cons "Find" '())))
+(ptester:test T (contains-flatt-p (cons "Flatt" '())))
+(ptester:test T (contains-flatt-p (cons "A" (cons "Flatt" (cons "C" '())))))
+(ptester:test NIL (contains-flatt-p (cons "A" (cons "B" (cons "C" '())))))

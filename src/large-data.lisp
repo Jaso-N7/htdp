@@ -87,3 +87,25 @@ determines whether it contains the name "Flatt".
   (cond ((endp names) nil)
 	((string= (first names) "Flatt") T)
 	(t  (contains-flatt-p (rest names)))))
+
+;; Ex 134
+;; contains-p : String (Names) -> Boolean
+;; Determines whether some given string occurs on a given list of strings.
+;; (defun contains-p (name names) (declare (ignore name names)) nil) ; stub
+
+(with-tests (:name "CONTAINS-P")
+  (ptester:test NIL (contains-p "Flatt" '()))
+  (ptester:test NIL (contains-p "Flatt" (cons "Find" '())))
+  (ptester:test T (contains-p "Flatt" (cons "Flatt" '())))
+  (ptester:test T (contains-p "Flatt" (cons "A" (cons "Flatt" (cons "C" '())))))
+  ;; Made a general example for which the answer must be false
+  (ptester:test NIL (contains-p "Flatt" (cons "A" (cons "B" (cons "C" '()))))))
+
+;; <template used (Names)>
+(defun contains-p (name names)
+  "Determines whether some given string occurs on a given list of strings.
+Similar to a call to MEMBER, however it returns a BOOLEAN instead of a list."
+  ;; (declare (notinline contains-p)) ; Tracing purposes
+  (cond ((endp names) NIL)
+	((string= name (first names)) T)
+	(t (contains-p name (rest names)))))

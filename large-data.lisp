@@ -31,3 +31,12 @@
 		    (cons "Findler"
 			  (cons "Stuttgard" '())))))
   "Exercise 130: A (Names) that contains five Names")
+
+;; A (Booleans) is one of:
+;; - '()
+;; - (cons Boolean (Booleans))
+;; INTERPRETATION: a list of Booleans. Take note that '() is also NIL
+
+(defparameter *lob1*
+  (cons t (cons nil (cons t '())))
+  "Exercise 131: An example of a list of booleans (Booleans).")

@@ -57,8 +57,10 @@ determines whether it contains the name "Flatt".
 (defun contains-flatt-p (names) nil)
 
 ;; EXAMPLES
-(ptester:test NIL (contains-flatt-p '()))
-(ptester:test NIL (contains-flatt-p (cons "Find" '())))
-(ptester:test T (contains-flatt-p (cons "Flatt" '())))
-(ptester:test T (contains-flatt-p (cons "A" (cons "Flatt" (cons "C" '())))))
-(ptester:test NIL (contains-flatt-p (cons "A" (cons "B" (cons "C" '())))))
+(with-tests (:name "Does the list contain a specific name?")
+  (ptester:test NIL (contains-flatt-p '()))
+  (ptester:test NIL (contains-flatt-p (cons "Find" '())))
+  (ptester:test T (contains-flatt-p (cons "Flatt" '())))
+  (ptester:test T (contains-flatt-p (cons "A" (cons "Flatt" (cons "C" '())))))
+  ;; Made a general example for which the answer must be false
+  (ptester:test NIL (contains-flatt-p (cons "A" (cons "B" (cons "C" '()))))))

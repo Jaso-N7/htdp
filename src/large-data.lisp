@@ -32,8 +32,8 @@
 			  (cons "Stuttgard" '())))))
   "Exercise 130: A (Names) that contains five Names")
 
-;; Template
-#+(and)
+;; Recursive Template
+#+(or)
 ;; f-for-names : (Names) -> ???
 (defun f-for-names (names)
   (cond ((endp names) nil)
@@ -64,7 +64,7 @@ determines whether it contains the name "Flatt".
 
 ;; (Names) -> Boolean
 ;; Determines whether "Flatt" is in a list of names
-(defun contains-flatt-p (names) (declare (ignore names)) nil)
+;; (defun contains-flatt-p (names) (declare (ignore names)) nil) ; stub
 
 ;; EXAMPLES
 (with-tests (:name "Does the list contain a specific name?")
@@ -74,3 +74,13 @@ determines whether it contains the name "Flatt".
   (ptester:test T (contains-flatt-p (cons "A" (cons "Flatt" (cons "C" '())))))
   ;; Made a general example for which the answer must be false
   (ptester:test NIL (contains-flatt-p (cons "A" (cons "B" (cons "C" '()))))))
+
+;; Template
+#+(and)
+;; contains-flatt-p : (Names) -> Boolean
+(defun contains-flatt-p (names)
+  (cond ((endp names) nil)
+	((consp names)
+	 (values
+	  (first names)
+	  (rest names)))))

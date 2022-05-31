@@ -76,9 +76,14 @@ determines whether it contains the name "Flatt".
   (ptester:test NIL (contains-flatt-p (cons "A" (cons "B" (cons "C" '()))))))
 
 ;; Template
-#+(and)
-;; contains-flatt-p : (Names) -> Boolean
+#+(or)
 (defun contains-flatt-p (names)
   (cond ((endp names) nil)
 	((consp names) (first names))
 	(t (rest names))))
+
+(defun contains-flatt-p (names)
+  "Searches a list of names for friend called Flatt"
+  (cond ((endp names) nil)
+	((string= (first names) "Flatt") T)
+	(t  (contains-flatt-p (rest names)))))

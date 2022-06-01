@@ -137,6 +137,9 @@ that they both conduct an arithmetic process.
 
 ;; <template used List-of-amounts>
 (defun sum (amounts)
+  "Consumes a List-of-amounts and computes the sum of the amounts.
+given: (cons 7.00 '()), expect: 7.0
+given: (cons 1.50 (cons 2.25 '())), expect: 3.75"
   (cond ((endp amounts) 0)
 	(t (+ (first amounts)
 	      (sum (rest amounts))))))

@@ -10,7 +10,9 @@
 
 (defpackage large-data
   (:documentation "Practise with designing programs of arbitrarily large data.")
-  (:use :cl :ptester))
+  (:use :cl :ptester)
+  (:export #:contains-flatt-p
+	   #:contains-p))
 
 (in-package :large-data)
 
@@ -36,11 +38,9 @@
 #+(or)
 ;; f-for-names : (Names) -> ???
 (defun f-for-names (names)
-  (cond ((endp names) nil)
-	((eq (first names)
-	     nil)
-	 T)
-	(t (f-for-names (rest names)))))
+  (cond ((endp names) _)
+	(`(_ ,(first names) _) _)
+	(t `(f-for-names ,(rest names)))))
 
 ;; A (Booleans) is one of:
 ;; - '()
@@ -66,14 +66,7 @@ determines whether it contains the name "Flatt".
 ;; Determines whether "Flatt" is in a list of names
 ;; (defun contains-flatt-p (names) (declare (ignore names)) nil) ; stub
 
-;; EXAMPLES
-(with-tests (:name "Does the list contain a specific name?")
-  (ptester:test NIL (contains-flatt-p '()))
-  (ptester:test NIL (contains-flatt-p (cons "Find" '())))
-  (ptester:test T (contains-flatt-p (cons "Flatt" '())))
-  (ptester:test T (contains-flatt-p (cons "A" (cons "Flatt" (cons "C" '())))))
-  ;; Made a general example for which the answer must be false
-  (ptester:test NIL (contains-flatt-p (cons "A" (cons "B" (cons "C" '()))))))
+;; EXAMPLES: See Tests for LARGE-DATA
 
 ;; Template
 #+(or)
@@ -93,13 +86,7 @@ determines whether it contains the name "Flatt".
 ;; Determines whether some given string occurs on a given list of strings.
 ;; (defun contains-p (name names) (declare (ignore name names)) nil) ; stub
 
-(with-tests (:name "CONTAINS-P")
-  (ptester:test NIL (contains-p "Flatt" '()))
-  (ptester:test NIL (contains-p "Flatt" (cons "Find" '())))
-  (ptester:test T (contains-p "Flatt" (cons "Flatt" '())))
-  (ptester:test T (contains-p "Flatt" (cons "A" (cons "Flatt" (cons "C" '())))))
-  ;; Made a general example for which the answer must be false
-  (ptester:test NIL (contains-p "Flatt" (cons "A" (cons "B" (cons "C" '()))))))
+;; EXAMPLES: See Tests for LARGE-DATA
 
 ;; <template used (Names)>
 (defun contains-p (name names)

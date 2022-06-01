@@ -24,6 +24,7 @@
 		:components
 		((:file "mixed-data")
 		 (:file "compound-data")
+		 (:file "large-data")
 		 (:file "guess")
 		 (:file "htdf")
 		 (:file "htdd")

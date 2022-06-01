@@ -1,5 +1,5 @@
 (defpackage htdp/tests
-  (:use :cl)
+  (:use :cl :ptester)
   (:import-from :htdf-tests
 		#:test-functions)
   (:import-from :htdd-tests
@@ -11,6 +11,8 @@
   (:import-from :section-7-tests
 		#:zoo-examples
 		#:mixed-examples)
+  (:import-from :large-data-tests
+		#:large-data-examples)
   (:export :resolve))
 
 (in-package :htdp/tests)
@@ -30,7 +32,8 @@
 			 (test-section-5 ok bad)
 			 (test-compound-data ok bad)
 			 (zoo-examples ok bad)
-			 (mixed-examples ok bad))))
+			 (mixed-examples ok bad)
+			 (large-data-examples ok bad))))
       (let ((passes (first accum))
 	    (failures (second accum)))
 

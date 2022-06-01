@@ -12,7 +12,8 @@
   (:documentation "Practise with designing programs of arbitrarily large data.")
   (:use :cl :ptester)
   (:export #:contains-flatt-p
-	   #:contains-p))
+	   #:contains-p
+	   #:sum))
 
 (in-package :large-data)
 
@@ -50,6 +51,30 @@
 (defparameter *lob1*
   (cons t (cons nil (cons t '())))
   "Exercise 131: An example of a list of booleans (Booleans).")
+
+;; Ex 138
+;; A List-of-amounts is one of:
+;; - '()
+;; - (cons PositiveNumber List-of-amounts)
+;; INTERPRETATION: Represents sequences of amounts of money
+
+(defparameter *loa1*
+  '()
+  "An example of the base case of a List-of-amounts")
+(defparameter *loa2*
+  (cons 7.00 '())
+  "An example of a List-of-amounts containing 1 PositiveNumber $7.00")
+(defparameter *loa3*
+  (cons 700.00 (cons 10.25 (cons 42.00 '())))
+  "An example of a List-of-amounts containing 3 PositiveNumbers")
+
+;; TEMPLATE: 
+#+(or)
+;; f-for-loa : List-of-amounts -> ???
+(defun f-for-loa (amounts)
+  (cond ((endp amounts) nil)
+	(`(_ _ ,(first amounts)) '_)
+	(t (f-for-loa (rest amounts)))))
 
 ;;; ============================================================================
 ;;;; FUNCTIONS
@@ -104,3 +129,14 @@ becoming recursive. The output type / result is also the same, indicating
 that they both conduct an arithmetic process.
 |#
 
+;; sum : List-of-amounts -> PositiveNumber
+;; Computes the sum of the amounts
+;; (defun sum (amounts) (declare (ignore amounts)) 0) ; stub
+
+;; EXAMPLES: See Tests
+
+;; <template used List-of-amounts>
+(defun sum (amounts)
+  (cond ((endp amounts) 0)
+	(t (+ (first amounts)
+	      (sum (rest amounts))))))

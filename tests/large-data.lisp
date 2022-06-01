@@ -3,14 +3,15 @@
   (:use :cl :ptester)
   (:import-from :large-data
 		#:contains-flatt-p
-		#:contains-p)
+		#:contains-p
+		#:sum)
   (:export #:large-data-examples))
 
 (in-package :large-data-tests)
 
 (defun large-data-examples (ok bad)
 
-  (with-tests (:name "CONTAINS-FLATT-P: Does the list contain a 'Flatt'?")
+  (with-tests (:name "CONTAINS-FLATT-P: Does the list contain the name 'Flatt'?")
     (ptester:test NIL (contains-flatt-p '()))
     (ptester:test NIL (contains-flatt-p (cons "Find" '())))
     (ptester:test T (contains-flatt-p (cons "Flatt" '())))
@@ -34,4 +35,15 @@
     (incf ok ptester:*test-successes*)
     (incf bad ptester:*test-errors*))
 
+  (terpri)
+  (with-tests (:name "SUM: Computes the sum of the amounts")
+    (test 0 (sum large-data::*loa1*) :test #'=)
+    (test 7.0 (sum large-data::*loa2*) :test #'=)
+    (test 752.25 (sum large-data::*loa3*) :test #'=)
+
+    (incf ok ptester:*test-successes*)
+    (incf bad ptester:*test-errors*))
+
+  (terpri)
+  
   (list ok bad))

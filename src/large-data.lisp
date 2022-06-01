@@ -14,7 +14,8 @@
   (:export #:contains-flatt-p
 	   #:contains-p
 	   #:sum
-	   #:pos-p))
+	   #:pos-p
+	   #:checked-sum))
 
 (in-package :large-data)
 
@@ -188,8 +189,14 @@ given: (cons -8 (cons 7 '()), expect: NIL"
 
 ;; checked-sum : (Numbers) -> Number?
 ;; Produces a sum if the input belongs to List-of-amounts; Otherwise, an error
-(defun checked-sum (ns) (declare (ignore ns))
-  (or 0 (error "Not List-of-amounts")))
+;; (defun checked-sum (ns) (declare (ignore ns))
+;;   (or 0 (error "Not List-of-amounts"))) ; stub
+
+;; < template from (Numbers) >
+(defun checked-sum (numbers)
+  (cond ((endp numbers) nil)
+	((pos-p numbers) (sum numbers))
+	(t (error "Try list of positive numbers instead."))))
 
 ;; EXAMPLES:
 (with-tests (:name "CHECKED-SUM: Produces a sum or an error")

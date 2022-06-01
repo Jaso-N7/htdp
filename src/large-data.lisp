@@ -184,9 +184,5 @@ given: (cons -8 (cons 7 '()), expect: NIL"
   (when (consp numbers)
     (every #'plusp numbers)))
 
-;; EXAMPLES
-(with-tests (:name "POS-P: Are all numbers positive?")
-  (test NIL (pos-p *lon1*))
-  (test T (pos-p *lon2*))
-  (test NIL (pos-p *lon3*))
-  (test T (pos-p (cons 1 (cons 2.3 (cons pi (cons 5.678 '())))))))
+;; EXAMPLES: See tests
+

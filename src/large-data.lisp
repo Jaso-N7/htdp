@@ -13,7 +13,8 @@
   (:use :cl :ptester)
   (:export #:contains-flatt-p
 	   #:contains-p
-	   #:sum))
+	   #:sum
+	   #:pos-p))
 
 (in-package :large-data)
 
@@ -75,6 +76,31 @@
   (cond ((endp amounts) nil)
 	(`(_ _ ,(first amounts)) '_)
 	(t (f-for-loa (rest amounts)))))
+
+;; A (Numbers) is one of:
+;; - '()
+;; - (cons Number (Numbers))
+;; INTERPRATION: A list of numbers
+
+;; EXAMPLE (Numbers)
+(defparameter *lon1*
+  '()
+  "An example of an empty List of Numbers.")
+(defparameter *lon2*
+  (cons 7 '())
+  "An example of a non-empty List of Numbers of one element.")
+(defparameter *lon3*
+  (cons -53 (cons 4.6 (cons 7e-2 (cons 2e5 '()))))
+  "A generalized example of a non-empty List of Numbers.")
+
+;; TEMPLATE (Numbers)
+#+(or)
+;; f-for-nums : (Numbers) -> ???
+(defun f-for-nums (numbers)
+  (cond ((endp numbers) nil)
+	(`(_ _ (first numbers)) '_)
+	(t (f-for-nums (rest numbers)))))
+
 
 ;;; ============================================================================
 ;;;; FUNCTIONS
@@ -143,3 +169,24 @@ given: (cons 1.50 (cons 2.25 '())), expect: 3.75"
   (cond ((endp amounts) 0)
 	(t (+ (first amounts)
 	      (sum (rest amounts))))))
+
+;; pos-p : (Numbers) -> Boolean
+;; Consumes a List of Numbers and determines whether all numbers are positive.
+;; (defun pos-p (numbers) (declare (ignore numbers)) NIL) ; stub
+
+;; < template from (Numbers) >
+;; pos-p : (Numbers) -> Boolean
+(defun pos-p (numbers)
+  "Consumes a List of Numbers and determines whether all numbers are positive
+numbers.
+given: (cons 7 '()), expect: T
+given: (cons -8 (cons 7 '()), expect: NIL"
+  (when (consp numbers)
+    (every #'plusp numbers)))
+
+;; EXAMPLES
+(with-tests (:name "POS-P: Are all numbers positive?")
+  (test NIL (pos-p *lon1*))
+  (test T (pos-p *lon2*))
+  (test NIL (pos-p *lon3*))
+  (test T (pos-p (cons 1 (cons 2.3 (cons pi (cons 5.678 '())))))))

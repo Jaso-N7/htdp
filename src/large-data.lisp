@@ -96,3 +96,11 @@ Similar to a call to MEMBER, however it returns a BOOLEAN instead of a list."
   (cond ((endp names) NIL)
 	((string= name (first names)) T)
 	(t (contains-p name (rest names)))))
+
+#| Ex 137
+CONTAINS-FLATT-P & HOW-MANY both process the same input, which leads them
+to utilize the same data definition template, resulting in them both
+becoming recursive. The output type / result is also the same, indicating
+that they both conduct an arithmetic process.
+|#
+

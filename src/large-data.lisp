@@ -108,17 +108,18 @@
 ;; - Just a
 ;; - Error
 ;; WHERE: a is any defined data type
-;; INTERPRETATION: Represents an output that may not be the expected type
+;; INTERPRETATION: Represents an optional value. A value of type Maybe a either
+;;   contains a value of type a or as specifed otherwise
 
 ;;; ============================================================================
 ;;;; FUNCTIONS
 
 ;; See Chapter 8.3
 #| SAMPLE PROBLEM
-You are working on the contact list for some new cell phone. The phone’s owner ; ; ; ;
-updates and consults this list on various occasions. For now, you are assigned ; ; ; ;
-the task of designing a function that consumes this list of contacts and ; ; ; ;
-determines whether it contains the name "Flatt". ; ; ; ;
+You are working on the contact list for some new cell phone. The phone’s owner ; ; ; ; ; ;
+updates and consults this list on various occasions. For now, you are assigned ; ; ; ; ; ;
+the task of designing a function that consumes this list of contacts and ; ; ; ; ; ;
+determines whether it contains the name "Flatt". ; ; ; ; ; ;
 |#
 
 ;; (Names) -> Boolean

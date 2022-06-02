@@ -5,7 +5,8 @@
 		#:contains-flatt-p
 		#:contains-p
 		#:sum
-		#:pos-p)
+		#:pos-p
+		#:checked-sum)
   (:export #:large-data-examples))
 
 (in-package :large-data-tests)
@@ -47,9 +48,14 @@
 
   (terpri)
   (with-tests (:name "POS-P: Are all numbers positive?")
-  (test NIL (pos-p large-data::*lon1*))
-  (test T (pos-p large-data::*lon2*))
-  (test NIL (pos-p large-data::*lon3*))
-  (test T (pos-p (cons 1 (cons 2.3 (cons pi (cons 5.678 '())))))))
+    (test NIL (pos-p large-data::*lon1*))
+    (test T (pos-p large-data::*lon2*))
+    (test NIL (pos-p large-data::*lon3*))
+    (test T (pos-p (cons 1 (cons 2.3 (cons pi (cons 5.678 '())))))))
+
+  (terpri)
+  (with-tests (:name "CHECKED-SUM: Produces a sum or an error")
+    (test 10 (checked-sum (cons 7 (cons 3 '()))))
+    (test-error (checked-sum (cons -7 (cons 3 '())))))
 
   (list ok bad))

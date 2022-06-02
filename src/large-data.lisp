@@ -198,7 +198,5 @@ given: (cons -8 (cons 7 '()), expect: NIL"
 	((pos-p numbers) (sum numbers))
 	(t (error "Try list of positive numbers instead."))))
 
-;; EXAMPLES:
-(with-tests (:name "CHECKED-SUM: Produces a sum or an error")
-  (test 10 (checked-sum (cons 7 (cons 3 '()))))
-  (test-error (checked-sum (cons -7 (cons 3 '())))))
+;; EXAMPLES: See Tests
+

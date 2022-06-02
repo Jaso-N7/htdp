@@ -5,7 +5,8 @@
 ;;;
 ;;; Author: Jason Robinson
 ;;; Created: Tue 05/31/2022
-;;;
+;;; Last Modified: Wed 06/01/2022 
+;;; 
 ;;; ============================================================================
 
 (defpackage large-data
@@ -194,6 +195,14 @@ given: (cons -8 (cons 7 '()), expect: NIL"
 
 ;; < template from (Numbers) >
 (defun checked-sum (numbers)
+  "Produces a sum if the input belongs to List-of-amounts; Otherwise, an error
+given: (cons 5 (cons 4 '())), expect: 9
+given: (cons 5 (cons -4 '())), expect: ERROR"
+  (assert (and (listp numbers)
+	       (every #'numberp numbers))
+	  (numbers)
+	  "Pre-condition: Expecting list of numbers, not ~A" numbers)
+
   (cond ((endp numbers) nil)
 	((pos-p numbers) (sum numbers))
 	(t (error "Try list of positive numbers instead."))))

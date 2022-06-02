@@ -61,6 +61,7 @@
 ;; - (cons PositiveNumber List-of-amounts)
 ;; INTERPRETATION: Represents sequences of amounts of money
 
+;; EXAMPLES:
 (defparameter *loa1*
   '()
   "An example of the base case of a List-of-amounts")
@@ -103,16 +104,21 @@
 	(`(_ _ (first numbers)) '_)
 	(t (f-for-nums (rest numbers)))))
 
+;; A Maybe a is either
+;; - Just a
+;; - Error
+;; WHERE: a is any defined data type
+;; INTERPRETATION: Represents an output that may not be the expected type
 
 ;;; ============================================================================
 ;;;; FUNCTIONS
 
 ;; See Chapter 8.3
 #| SAMPLE PROBLEM
-You are working on the contact list for some new cell phone. The phone’s owner
-updates and consults this list on various occasions. For now, you are assigned
-the task of designing a function that consumes this list of contacts and
-determines whether it contains the name "Flatt".
+You are working on the contact list for some new cell phone. The phone’s owner ; ; ; ;
+updates and consults this list on various occasions. For now, you are assigned ; ; ; ;
+the task of designing a function that consumes this list of contacts and ; ; ; ;
+determines whether it contains the name "Flatt". ; ; ; ;
 |#
 
 ;; (Names) -> Boolean
@@ -188,7 +194,7 @@ given: (cons -8 (cons 7 '()), expect: NIL"
 
 ;; EXAMPLES: See tests
 
-;; checked-sum : (Numbers) -> Number?
+;; checked-sum : (Numbers) -> Maybe Number
 ;; Produces a sum if the input belongs to List-of-amounts; Otherwise, an error
 ;; (defun checked-sum (ns) (declare (ignore ns))
 ;;   (or 0 (error "Not List-of-amounts"))) ; stub

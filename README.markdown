@@ -12,7 +12,14 @@ Practice and solutions to exercises from both edX's (UBCx HtC1x) How to Code: Si
 
 `(asdf:test-system :htdp)`
 
+Implementations tested:
+
+* CCL (main implementation)
+* ECL
+
 If time permits, I would also like to implement Property-Based testing.
+
+* NOTE: Some tests will fail due to floating point precision, which is implementation dependent.
 
 ## Author
 

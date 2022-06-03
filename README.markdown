@@ -2,7 +2,7 @@
 
 ## About
 
-This is practice from both edX's (UBCx HtC1x) How to Code: Simple Data and most of the exercises from the books HtDP/1e & HtDP/2e
+Practice and solutions to exercises from both edX's (UBCx HtC1x) How to Code: Simple Data and most of the exercises from the books HtDP/1e & HtDP/2e.
 
 ## Installation
 

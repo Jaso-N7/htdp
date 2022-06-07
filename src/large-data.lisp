@@ -17,7 +17,8 @@
 	   #:contains-p
 	   #:sum
 	   #:pos-p
-	   #:checked-sum))
+	   #:checked-sum
+	   #:count-str))
 
 (in-package :large-data)
 
@@ -229,7 +230,4 @@ given: (cons 5 (cons -4 '())), expect: ERROR"
 	    (count-str (rest los) s)))
 	(t (+ (count-str (rest los) s)))))
 
-(ptester:with-tests (:name "COUNT-STR")
-  (ptester:test 0 (count-str '("this" "is" "a" "list") "string"))
-  (ptester:test 1 (count-str '("this" "is" "a" "list") "list"))
-  (ptester:test 2 (count-str '("this" "is" "a" "list" "of" "list") "list")))
+

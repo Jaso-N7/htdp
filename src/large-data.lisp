@@ -1,3 +1,4 @@
+
 ;;; -*- Mode: Lisp; Syntax: Common-Lisp; Package: large-data -*-
 ;;;
 ;;; How to design for Arbitrarily Large Data
@@ -216,3 +217,19 @@ given: (cons 5 (cons -4 '())), expect: ERROR"
 
 ;; EXAMPLES: See Tests
 
+;; (Strings) String -> Number
+;; Determines how often String occurs in (Strings)
+;; (defun count-str (los s) (declare (ignore los s)) 0) ; stub
+
+(defun count-str (los s)
+  "Determines how often String occurs in (Strings). Test is case-sensitive"
+  (cond ((endp los) 0)
+	((string= s (first los))
+	 (+ 1
+	    (count-str (rest los) s)))
+	(t (+ (count-str (rest los) s)))))
+
+(ptester:with-tests (:name "COUNT-STR")
+  (ptester:test 0 (count-str '("this" "is" "a" "list") "string"))
+  (ptester:test 1 (count-str '("this" "is" "a" "list") "list"))
+  (ptester:test 2 (count-str '("this" "is" "a" "list" "of" "list") "list")))

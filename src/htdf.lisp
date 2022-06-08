@@ -187,10 +187,18 @@ a specific range"
 ;; (defun wage* (hours) '(0)) ; stub
 
 ;; Template
+#+(or)
 (defun f-for-ns (ns)
   (cond ((endp ns) '())
 	(`(_ ,(first ns) _) '(_))
 	(t `(_ ,(f-for-ns (rest ns))))))
+
+(defun wage* (ns &optional (rate 14))
+  "Computes the weekly wages for the weekly hours"
+  (if (endp ns)
+      '()
+      (cons (wage (first ns) rate)
+	    (wage* (rest ns) rate))))
 
 ;; Ex 7.5.2
 ;; is-between-5-6-p : Number -> Boolean

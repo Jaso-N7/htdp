@@ -134,6 +134,8 @@
     (test '() (wage* '() 14))
     (test '(392) (wage* '(28) 14) :test #'equal)
     (test '(672 336) (wage* '(48 24) 14) :test #'equal)
+    (test-error (wage* '(101)))
+    (test-error (wage* '(24 40 60 100 120)))
 
     (incf ok *test-successes*)
     (incf bad *test-errors*))

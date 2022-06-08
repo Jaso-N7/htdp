@@ -195,10 +195,13 @@ a specific range"
 
 (defun wage* (ns &optional (rate 14))
   "Computes the weekly wages for the weekly hours"
-  (if (endp ns)
-      '()
-      (cons (wage (first ns) rate)
-	    (wage* (rest ns) rate))))
+  (cond ((endp ns)
+	 '())
+	((> (first ns) 100)
+	 (error "No employee could possibly work more than 100hrs / week!"))
+	(t 
+	 (cons (wage (first ns) rate)
+	       (wage* (rest ns) rate)))))
 
 ;; Ex 7.5.2
 ;; is-between-5-6-p : Number -> Boolean

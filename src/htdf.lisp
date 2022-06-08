@@ -184,7 +184,13 @@ a specific range"
 ;; Ex 161
 ;; (Numbers) -> (Numbers)
 ;; computes the weekly wages for the weekly hours
-(defun wage* (hours) '(0)) 
+;; (defun wage* (hours) '(0)) ; stub
+
+;; Template
+(defun f-for-ns (ns)
+  (cond ((endp ns) '())
+	(`(_ ,(first ns) _) '(_))
+	(t `(_ ,(f-for-ns (rest ns))))))
 
 ;; Ex 7.5.2
 ;; is-between-5-6-p : Number -> Boolean

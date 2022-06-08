@@ -30,6 +30,7 @@ Section: 3.1")
    #:revenue
    #:cost
    #:wage
+   #:wage*
    #:attendees
    #:is-between-5-6-p))
 
@@ -179,6 +180,11 @@ a specific range"
 	   ((= hours 20) hours)
 	   ((= hours 65) hours)
 	   (t  0))))
+
+;; Ex 161
+;; (Numbers) -> (Numbers)
+;; computes the weekly wages for the weekly hours
+(defun wage* (hours) '(0)) 
 
 ;; Ex 7.5.2
 ;; is-between-5-6-p : Number -> Boolean

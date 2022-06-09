@@ -13,12 +13,15 @@
 (defpackage large-data
   (:documentation "Practise with designing programs of arbitrarily large data.")
   (:use :cl :ptester)
+  (:import-from :htdf
+		#:wage)
   (:export #:contains-flatt-p
 	   #:contains-p
 	   #:sum
 	   #:pos-p
 	   #:checked-sum
-	   #:count-str))
+	   #:count-str
+	   #:wage*))
 
 (in-package :large-data)
 
@@ -230,4 +233,24 @@ given: (cons 5 (cons -4 '())), expect: ERROR"
 	    (count-str (rest los) s)))
 	(t (+ (count-str (rest los) s)))))
 
+;; Ex 161
+;; (Numbers) -> (Numbers)
+;; computes the weekly wages for the weekly hours
+;; (defun wage* (hours) '(0)) ; stub
 
+;; Template
+#+(or)
+(defun f-for-ns (ns)
+  (cond ((endp ns) '())
+	(`(_ ,(first ns) _) '(_))
+	(t `(_ ,(f-for-ns (rest ns))))))
+
+(defun wage* (ns &optional (rate 14))
+  "Computes the weekly wages for the weekly hours"
+  (cond ((endp ns)
+	 '())
+	((> (first ns) 100)
+	 (error "No employee could possibly work more than 100hrs / week!"))
+	(t 
+	 (cons (wage (first ns) rate)
+	       (wage* (rest ns) rate)))))

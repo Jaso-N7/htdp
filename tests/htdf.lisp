@@ -24,7 +24,6 @@
 		#:revenue
 		#:cost
 		#:wage
-		#:wage*
 		#:attendees
 		#:is-between-5-6-p)
   (:export #:test-functions))
@@ -125,20 +124,6 @@
     (incf ok *test-successes*)
     (incf bad *test-errors*))
 
-  (terpri)
-  (with-tests (:name "WAGE*")
-    (test '() (wage* '()))
-    (test '(336) (wage* '(28) 12) :test #'equal)
-    (test '(576 288) (wage* '(48 24) 12) :test #'equal)
-    (test '(0 0) (wage* '(4 2)) :test #'equal)
-    (test '() (wage* '() 14))
-    (test '(392) (wage* '(28) 14) :test #'equal)
-    (test '(672 336) (wage* '(48 24) 14) :test #'equal)
-    (test-error (wage* '(101)))
-    (test-error (wage* '(24 40 60 100 120)))
-
-    (incf ok *test-successes*)
-    (incf bad *test-errors*))
   (terpri)
 
   (with-tests (:name "IS-BETWEEN-5-6-P")

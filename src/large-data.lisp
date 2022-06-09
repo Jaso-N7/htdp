@@ -254,3 +254,39 @@ given: (cons 5 (cons -4 '())), expect: ERROR"
 	(t 
 	 (cons (wage (first ns) rate)
 	       (wage* (rest ns) rate)))))
+
+;; (Numbers) -> (Numbers)
+;; converts a list of measurements in Fahrenheit to a list of Celsius measurements
+;; (defun convert-fc (fs) '()) ; stub
+
+;; Examples: See LARGE-DATA Tests
+
+;; Template: Reused f-for-ns
+
+(defun convert-fc (fs)
+  "Converts a list of measurements in Fahrenheit to a list of Celsius measurements"
+  (cond ((endp fs) '())
+	((check-fs fs)
+	 (mapcar #'f->c fs))
+	(t 
+	 (error "Temperature ~A is below absolute zero. Cannot convert" (first fs)))))
+
+;; (Numbers) -> Boolean
+(defun check-fs (fs)
+  "Confirms that all temperatures are above absolute zero"
+  (every #'(lambda (f)
+	     (>= f -459.67))
+	 fs))
+
+;; Number -> Number
+;; Converts Fahnrenheit to Celsius
+;; (defun f->c (n) (declare (ignore n)) 0)  ; stub
+
+;; Template
+#+(or)
+(defun f-for-n (n)
+  n)
+
+(defun f->c (f)
+  "Converts Fahnrenheit to Celsius"
+  (float (* (- f 32) 5/9)))

@@ -7,7 +7,9 @@
 		#:sum
 		#:pos-p
 		#:checked-sum
-		#:count-str)
+		#:count-str
+		#:wage*
+		#:convert-fc)
   (:export #:large-data-examples))
 
 (in-package :large-data-tests)
@@ -64,6 +66,29 @@
     (ptester:test 0 (count-str '("this" "is" "a" "list") "string"))
     (ptester:test 1 (count-str '("this" "is" "a" "list") "list"))
     (ptester:test 2 (count-str '("this" "is" "a" "list" "of" "list") "list")))
+
+  (terpri)
+  (with-tests (:name "WAGE*")
+    (test '() (wage* '()))
+    (test '(336) (wage* '(28) 12) :test #'equal)
+    (test '(576 288) (wage* '(48 24) 12) :test #'equal)
+    (test '(0 0) (wage* '(4 2)) :test #'equal)
+    (test '() (wage* '() 14))
+    (test '(392) (wage* '(28) 14) :test #'equal)
+    (test '(672 336) (wage* '(48 24) 14) :test #'equal)
+    (test-error (wage* '(101)))
+    (test-error (wage* '(24 40 60 100 120)))
+
+    (incf ok *test-successes*)
+    (incf bad *test-errors*))
   (terpri)
 
+  (with-tests (:name "CONVERT-FC")
+    (test '() (convert-fc '()))
+    (test-error (convert-fc '(32 -500 -21 56.7)))
+    (test '(-273.15002 -40.0 -17.777779 0.0 37.0 100.0)
+	  (convert-fc '(-459.67 -40 0 32 98.6 212))
+	  :test #'equal))
+
+  (terpri)
   (list ok bad))

@@ -30,7 +30,6 @@ Section: 3.1")
    #:revenue
    #:cost
    #:wage
-   #:wage*
    #:attendees
    #:is-between-5-6-p))
 
@@ -175,33 +174,11 @@ Company XYZ & Co. pays all its employees $12 per hour. A typical employee works 
   "Determines the wage of an employee from the number of hours worked within
 a specific range"
   (* rate 
-     (cond ((and (>= hours 20) (<= hours 65))
+     (cond ((and (>= 20 hours 65) (<= hours 65))
 	    hours)
 	   ((= hours 20) hours)
 	   ((= hours 65) hours)
 	   (t  0))))
-
-;; Ex 161
-;; (Numbers) -> (Numbers)
-;; computes the weekly wages for the weekly hours
-;; (defun wage* (hours) '(0)) ; stub
-
-;; Template
-#+(or)
-(defun f-for-ns (ns)
-  (cond ((endp ns) '())
-	(`(_ ,(first ns) _) '(_))
-	(t `(_ ,(f-for-ns (rest ns))))))
-
-(defun wage* (ns &optional (rate 14))
-  "Computes the weekly wages for the weekly hours"
-  (cond ((endp ns)
-	 '())
-	((> (first ns) 100)
-	 (error "No employee could possibly work more than 100hrs / week!"))
-	(t 
-	 (cons (wage (first ns) rate)
-	       (wage* (rest ns) rate)))))
 
 ;; Ex 7.5.2
 ;; is-between-5-6-p : Number -> Boolean
